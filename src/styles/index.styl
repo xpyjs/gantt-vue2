@@ -1,0 +1,89 @@
+// 隐藏元素，但保留位置
+.gt-hide
+  visibility hidden
+
+.gt-shadow
+  box-shadow 2px 2px 3px rgba(200, 200, 200, 0.5)
+
+.gt-text-nowrap
+  white-space nowrap
+  text-overflow ellipsis
+
+.gt-text-title
+  font-size 16px
+  font-weight bold
+  font-family 'Times New Roman', Times, serif
+
+.gt-text-secondary-title
+  font-size 14px
+  font-weight bold
+  font-family 'Times New Roman', Times, serif
+
+.gt-text-content
+  font-size 12px
+  font-family 'Times New Roman', Times, serif
+
+.gt-text-content-big
+  font-size 14px
+  font-family 'Times New Roman', Times, serif
+
+.gt-text-content-sub
+  font-size 12px
+  color darkgrey
+  font-family 'Times New Roman', Times, serif
+
+.gt-noselect *
+  -moz-user-select none !important
+  -webkit-user-select none !important
+  -ms-user-select none !important
+  -khtml-user-select none !important
+  user-select none !important
+  -webkit-touch-callout none
+  cursor default !important
+
+.gt-animation
+  transition all 0.1s
+
+.gt-mask-show
+  width 100%
+  height 100%
+  z-index 998
+  position absolute
+  background-color grey
+  opacity 0.5
+  transition opacity 0.2s
+
+.gt-mask-hide
+  opacity 0
+  transition opacity 0.2s
+
+.fade-enter-active .fade-leave-active
+  transition opacity 0.5s
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+  opacity 0
+
+// 麻蛋的，animation.css按官方文档写的，不生效，自己封装的倒是管用。
+.fade-in-right
+  animation fadeInRight 0.5s
+
+.fade-out-right
+  animation fadeOutRight 0.5s
+
+.fade-in-left
+  animation fadeInLeft 0.5s
+
+.fade-out-left
+  animation fadeOutLeft 0.5s
+
+.fade-in-up
+  animation fadeInUp 0.5s
+
+.fade-out-up
+  animation fadeOutUp 0.5s
+
+.fade-in-down
+  animation fadeInDown 0.5s
+
+.fade-out-down
+  animation fadeOutDown 0.5s

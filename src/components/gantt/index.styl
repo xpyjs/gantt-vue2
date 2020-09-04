@@ -1,0 +1,39 @@
+@import '../../styles/light.styl'
+
+.gt-gantt-content-wrap
+    z-index 2
+    overflow auto
+    position relative
+    width calc(100% - var(--table-width))
+    height 100%
+
+    .gt-gantt-row-wrap
+        min-height 100px
+        z-index 2
+        position relative
+        background-color $default-content-background-color
+
+.gt-gantt-handle-btn
+    position fixed
+    z-index 100
+    display flex
+    flex-direction row-reverse
+
+.gt-gantt-more-btn-area
+    position fixed
+    display flex
+    flex-direction row-reverse
+
+.gt-today-line
+    top 0
+    position absolute
+    z-index 6
+    opacity 0.5
+    pointer-events none
+    background-color lightblue
+
+.gt-weekend-line
+    top 0
+    position absolute
+    opacity 0.5
+    background-color lightgrey

@@ -1,0 +1,37 @@
+$default-slider-border-radius = 3px
+
+_sliderCtrlChunk(f)
+    z-index 1
+    width 10px
+    position absolute
+    filter brightness(150%)
+    transition all 0.2s
+
+.gt-slider
+    position absolute
+    height 70%
+    border-radius $default-slider-border-radius
+    font-size 12px
+    top ((100% - @height) / 2)
+    z-index 5
+
+    .gt-slider-content
+        width calc(100% - 40px)
+        height 100%
+        position absolute
+        left 0
+        padding 0 20px
+        display flex
+        align-items center
+
+    .gt-slider-ctrl__left
+        _sliderCtrlChunk(left)
+        left 0
+        border-top-left-radius $default-slider-border-radius
+        border-bottom-left-radius $default-slider-border-radius
+
+    .gt-slider-ctrl__right
+        _sliderCtrlChunk(right)
+        right 0
+        border-top-right-radius $default-slider-border-radius
+        border-bottom-right-radius $default-slider-border-radius

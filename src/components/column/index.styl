@@ -1,0 +1,32 @@
+@import '../../styles/light.styl'
+
+.gt-column
+    width calc(var(--column-width) - 4px)
+    height calc(100% - 4px)
+    padding 2px
+    display flex
+    flex-shrink 0
+    border-right 1px solid $default-content-border-color
+
+    .gt-column__checkbox
+        width var(--box-size)
+        height var(--box-size)
+        flex-shrink 0
+        margin auto 5px
+
+    .gt-column__expand
+        width var(--box-size)
+        height var(--box-size)
+        flex-shrink 0
+        margin auto 5px auto 0
+
+    .gt-column__chunk
+        width 100%
+        height calc(var(--row-height) - 4px)
+        line-height @height
+        display flex
+        white-space nowrap
+        overflow hidden
+
+        *
+            width 100%

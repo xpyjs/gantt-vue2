@@ -1,0 +1,43 @@
+@import '../../styles/light.styl'
+
+.gt-root
+    width calc(100% - var(--root-border) * 2)
+    height calc(100% - var(--root-border) * 2)
+    border var(--root-border) solid $default-header-border-color
+    overflow hidden
+    font-size 14px
+    position relative
+    display flex
+    box-sizing: initial;
+
+.gt-column-slider-line
+    width 1px
+    height 100%
+    border-right 1px dotted $default-header-border-color
+    opacity 0.5
+    position absolute
+    z-index 9
+
+.gt-table-slider-line
+    width 2px
+    height 100%
+    background-color $default-header-border-color
+    position absolute
+    z-index 9
+    cursor w-resize
+
+    &:hover
+        box-shadow 0px 0px 2px $default-header-border-color
+        filter blur(1px)
+        opacity 0.5
+
+.gt-row-strip
+    position absolute
+    pointer-events none // 鼠标穿透
+    z-index 4
+
+.gt-row-hover
+    background-color rgba(grey, 0.2) !important
+
+.gt-row-select
+    background-color rgba(yellow, 0.2) !important

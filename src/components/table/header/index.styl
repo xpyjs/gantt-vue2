@@ -1,0 +1,42 @@
+@import '../../../styles/light.styl'
+
+.gt-table-header
+    width 100%
+    height var(--header-height)
+    position sticky
+    position -webkit-sticky
+    top 0
+    z-index 5
+    background-color $default-header-background-color
+    border-bottom 1px solid $default-header-border-color
+
+    .gt-table-header-chunk
+        position relative
+        display inline-block
+        height 100%
+        border-right 1px solid $default-header-border-color
+        font-size 18px
+        font-weight bold
+        overflow hidden
+
+        div
+            // 10px 的 padding，还有 2px 的 位移条
+            width calc(100% - 12px)
+            padding 5px
+            display inline-block
+            text-align center
+            white-space nowrap
+            overflow hidden
+            text-overflow ellipsis
+
+        .gt-header__table-chunk__move-slider
+            width 2px
+            height 100%
+            padding 0px
+            margin 0px
+            opacity 0
+            background-color white
+            cursor w-resize !important
+
+            &:hover
+                opacity 0.3
