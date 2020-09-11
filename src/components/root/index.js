@@ -204,12 +204,14 @@ export default {
   },
 
   mounted() {
+    this.rootHeight = this.$el.clientHeight;
+    this.ganttResizeObserver.observe(this.$refs.ganttContent.$el);
+  },
+
+  updated() {
     this.scrollBarHeight =
       this.$refs.tableContent.$el.clientHeight -
       this.$refs.ganttContent.$el.clientHeight;
-    this.rootHeight = this.$el.clientHeight;
-
-    this.ganttResizeObserver.observe(this.$refs.ganttContent.$el);
   },
 
   beforeDestroy() {},
