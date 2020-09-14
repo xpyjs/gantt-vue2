@@ -419,11 +419,7 @@ export default {
      */
     IFMoveSlider: function(data) {
       // 抛出接口事件
-      this.$emit(
-        "move-slider",
-        { start: data.start, end: data.end },
-        { ...data.data }
-      );
+      this.$emit("move-slider", { ...data.data });
     },
 
     /**

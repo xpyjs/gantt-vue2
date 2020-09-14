@@ -129,7 +129,6 @@ export default {
     },
 
     setBetweenDate() {
-      console.log(this.$parent.rowData.start, this.$parent.rowData.end);
       // 左边界
       if (compareDate(this.$parent.rowData.start, this.gd.start) === "l") {
         this.gd.start = this.$parent.rowData.start;
@@ -139,8 +138,6 @@ export default {
       if (compareDate(this.$parent.rowData.end, this.gd.end) === "r") {
         this.gd.end = this.$parent.rowData.end;
       }
-
-      console.log(this.gd.start, this.gd.end);
 
       this.root.setHeaders();
     },
