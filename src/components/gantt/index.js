@@ -75,8 +75,10 @@ export default {
 
     isTodayInArea: function() {
       const today = createDate().getTime();
-      const sd = createDate(this.gd.start).setHours(0);
-      const ed = createDate(this.gd.end).setHours(24);
+      const sd = createDate(this.pd.ganttHeaders[0]).setHours(0);
+      const ed = createDate(
+        this.pd.ganttHeaders[this.pd.ganttHeaders.length - 1]
+      ).setHours(24);
 
       if (today < sd || today > ed) {
         return false;
@@ -87,6 +89,8 @@ export default {
 
     weekendList: function() {
       const r = [];
+      if (!this.pd.ganttOptions[Variables.key.showWeekend]) return r;
+
       const sd = createDate(this.gd.start);
       let d = sd.getDay();
       let i = 0;
@@ -311,7 +315,7 @@ export default {
           [
             this.renderRow(h, Row.name, this.rowData),
             // 今天时间线
-            this.isTodayInArea
+            this.isTodayInArea && this.pd.ganttOptions[Variables.key.showToday]
               ? h("div", {
                   class: { "gt-today-line": true },
                   style: {

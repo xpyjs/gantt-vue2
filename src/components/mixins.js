@@ -135,9 +135,8 @@ export default {
       // TODO: 合并展开的动画可以在好一些
       return (
         <transition-group
-          name="fade"
-          enter-active-class="fade-in-right"
-          leave-active-class="fade-out-right"
+          enter-active-class="fade-in-down"
+          leave-active-class="fade-out-up"
         >
           {data.map(item => {
             const offsetTop = item.uindex * this.pd.rowHeight;

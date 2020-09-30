@@ -180,18 +180,7 @@ export default {
     this.pd.setNodes(this.$slots.default);
 
     // 保存其他参数
-    this.pd.showCheckbox = this.showCheckbox;
-    this.pd.showExpand = this.showExpand;
-    this.pd.headerHeight = this.headerHeight;
-    this.pd.rowHeight = this.rowHeight;
-    this.pd.levelColor = this.levelColor;
-    this.pd.setGanttOptions({
-      [Variables.key.columnWidth]: this.ganttColumnWidth,
-      [Variables.key.showToday]: this.showToday,
-      [Variables.key.showWeekend]: this.showWeekend,
-      [Variables.key.header]: this.headerStyle || {},
-      [Variables.key.body]: this.bodyStyle || {}
-    });
+    this.saveParams();
   },
 
   beforeMount() {
@@ -281,10 +270,65 @@ export default {
     data: function(nv) {
       this.gd.diffData(nv, this.dataOptions);
       this.setHeaders();
+    },
+
+    levelColor() {
+      this.saveParams();
+    },
+
+    showCheckbox() {
+      this.saveParams();
+    },
+
+    showExpand() {
+      this.saveParams();
+    },
+
+    headerHeight() {
+      this.saveParams();
+    },
+
+    rowHeight() {
+      this.saveParams();
+    },
+
+    ganttColumnWidth() {
+      this.saveParams();
+    },
+
+    showToday() {
+      this.saveParams();
+    },
+
+    showWeekend() {
+      this.saveParams();
+    },
+
+    headerStyle() {
+      this.saveParams();
+    },
+
+    bodyStyle() {
+      this.saveParams();
     }
   },
 
   methods: {
+    saveParams() {
+      this.pd.showCheckbox = this.showCheckbox;
+      this.pd.showExpand = this.showExpand;
+      this.pd.headerHeight = this.headerHeight;
+      this.pd.rowHeight = this.rowHeight;
+      this.pd.levelColor = this.levelColor;
+      this.pd.setGanttOptions({
+        [Variables.key.columnWidth]: this.ganttColumnWidth,
+        [Variables.key.showToday]: this.showToday,
+        [Variables.key.showWeekend]: this.showWeekend,
+        [Variables.key.header]: this.headerStyle || {},
+        [Variables.key.body]: this.bodyStyle || {}
+      });
+    },
+
     setHeaders() {
       const d =
         getDateInterval(this.gd.start, this.gd.end) /
@@ -448,10 +492,12 @@ export default {
       [
         // 拖动表头大小时的位移线
         h("div", {
-          class: { "gt-column-slider-line": true },
+          class: {
+            "gt-column-slider-line": true,
+            "gt-hide": !this.columnSliderVisible
+          },
           style: {
-            left: `${this.columnSliderLeft}px`,
-            visibility: this.columnSliderVisible ? "visible" : "hidden"
+            left: `${this.columnSliderLeft}px`
           }
         }),
 

@@ -93,17 +93,18 @@ export default {
           );
         })
         .concat(
-          h("div", {
-            class: { "gt-gantt-header-today-arrow": true },
-            style: {
-              left: `${this.todayLeft +
-                (this.colWidth - this.arrowWidth) / 2}px`,
-              "border-width": `${this.arrowWidth / 2}px`,
-              "border-top-color": this.pd.ganttOptions[Variables.key.body][
-                Variables.key.todayColor
-              ]
-            }
-          })
+          this.pd.ganttOptions[Variables.key.showToday] &&
+            h("div", {
+              class: { "gt-gantt-header-today-arrow": true },
+              style: {
+                left: `${this.todayLeft +
+                  (this.colWidth - this.arrowWidth) / 2}px`,
+                "border-width": `${this.arrowWidth / 2}px`,
+                "border-top-color": this.pd.ganttOptions[Variables.key.body][
+                  Variables.key.todayColor
+                ]
+              }
+            })
         )
     );
   }
