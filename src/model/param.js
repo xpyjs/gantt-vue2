@@ -80,7 +80,9 @@ export class PD {
         [Variables.key.weekendColor]: "lightgrey",
         [Variables.key.bgColor]: "",
         [Variables.key.borderColor]: "",
-        [Variables.key.textColor]: ""
+        [Variables.key.textColor]: "",
+        [Variables.key.hoverRowColor]: "#ccc",
+        [Variables.key.selectRowColor]: "#123456"
       }
     };
   }

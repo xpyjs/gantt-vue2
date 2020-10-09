@@ -110,7 +110,9 @@ export default {
         borderColor: "",
         textColor: "",
         todayColor: "",
-        weekendColor: ""
+        weekendColor: "",
+        hoverColor: "#f00",
+        selectColor: "#0f0"
       }
     };
   },

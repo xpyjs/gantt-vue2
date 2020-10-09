@@ -26,7 +26,9 @@ export const Variables = {
     weekendColor: "weekendColor",
     bgColor: "bgColor",
     borderColor: "borderColor",
-    textColor: "textColor"
+    textColor: "textColor",
+    hoverRowColor: "hoverColor",
+    selectRowColor: "selectColor"
   },
 
   size: {

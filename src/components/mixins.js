@@ -4,7 +4,8 @@ import {
   isBoolean,
   isFunction,
   formatDate,
-  getDateInterval
+  getDateInterval,
+  changeAlpha
 } from "../utils";
 
 export default {
@@ -155,8 +156,14 @@ export default {
       // 悬停条
       return this.gd.hoverIndex >= 0
         ? h("div", {
-            class: { "gt-row-strip": true, "gt-row-hover": true },
+            class: { "gt-row-strip": true },
             style: {
+              "background-color": `${changeAlpha(
+                this.pd.ganttOptions[Variables.key.body][
+                  Variables.key.hoverRowColor
+                ] || "#ccc",
+                0.2
+              )} !important`,
               width: `${width}px`,
               height: `${this.pd.rowHeight}px`,
               top: `${this.pd.headerHeight +
@@ -170,8 +177,14 @@ export default {
       //选择条
       return this.gd.selectIndex >= 0
         ? h("div", {
-            class: { "gt-row-strip": true, "gt-row-select": true },
+            class: { "gt-row-strip": true },
             style: {
+              "background-color": `${changeAlpha(
+                this.pd.ganttOptions[Variables.key.body][
+                  Variables.key.selectRowColor
+                ] || "#123456",
+                0.2
+              )} !important`,
               width: `${width}px`,
               height: `${this.pd.rowHeight}px`,
               top: `${this.pd.headerHeight +
