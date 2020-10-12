@@ -131,7 +131,7 @@ export function isObjectValueEqual(a, b) {
     var t1 = a[o] instanceof Object;
     var t2 = b[o] instanceof Object;
     if (t1 && t2) {
-      return isObjectValueEqual(a[o], b[o]);
+      if (!isObjectValueEqual(a[o], b[o])) return false;
     } else if (a[o] !== b[o]) {
       return false;
     }

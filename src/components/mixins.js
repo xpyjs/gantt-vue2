@@ -27,10 +27,6 @@ export default {
       return this.pd.ganttOptions[Variables.key.columnWidth];
     },
 
-    rowFlatData: function() {
-      return this.gd.flatData;
-    },
-
     contentHeight: function() {
       return this.gd.length * this.pd.rowHeight;
     },
@@ -133,65 +129,45 @@ export default {
       const top = this.root.offsetTop - this.pd.rowHeight * marginNumber;
       const bottom = this.root.offsetBottom + this.pd.rowHeight * marginNumber;
 
+      const selectStyle = {
+        "background-color": `${changeAlpha(
+          this.pd.ganttOptions[Variables.key.body][
+            Variables.key.selectRowColor
+          ] || "#123456",
+          0.2
+        )} !important`
+      };
+
+      const hoverStyle = {
+        "background-color": `${changeAlpha(
+          this.pd.ganttOptions[Variables.key.body][
+            Variables.key.hoverRowColor
+          ] || "#ccc",
+          0.2
+        )} !important`,
+        transition: "all 0.1s"
+      };
+
       // TODO: 合并展开的动画可以在好一些
       return (
-        <transition-group
-          enter-active-class="fade-in-down"
-          leave-active-class="fade-out-up"
-        >
+        <transition-group tag="div" name="update-data">
           {data.map(item => {
             const offsetTop = item.uindex * this.pd.rowHeight;
             const condition = top < offsetTop && offsetTop < bottom;
+
+            const ss = this.gd.selectIndex === item.uindex ? selectStyle : {};
+            const hs = this.gd.hoverIndex === item.uindex ? hoverStyle : {};
+            const style = { ...ss, ...hs };
+
             return h(el, {
               key: item.uuid,
+              class: { "update-data-item": true },
+              style: style,
               props: { rowData: condition ? item : null }
             });
           })}
         </transition-group>
       );
-    },
-
-    // 渲染行的装饰条，包括悬停条和选择条
-    renderRowHoverStrip(h, width) {
-      // 悬停条
-      return this.gd.hoverIndex >= 0
-        ? h("div", {
-            class: { "gt-row-strip": true },
-            style: {
-              "background-color": `${changeAlpha(
-                this.pd.ganttOptions[Variables.key.body][
-                  Variables.key.hoverRowColor
-                ] || "#ccc",
-                0.2
-              )} !important`,
-              width: `${width}px`,
-              height: `${this.pd.rowHeight}px`,
-              top: `${this.pd.headerHeight +
-                this.pd.rowHeight * this.gd.hoverIndex}px`
-            }
-          })
-        : null;
-    },
-
-    renderRowSelectStrip(h, width) {
-      //选择条
-      return this.gd.selectIndex >= 0
-        ? h("div", {
-            class: { "gt-row-strip": true },
-            style: {
-              "background-color": `${changeAlpha(
-                this.pd.ganttOptions[Variables.key.body][
-                  Variables.key.selectRowColor
-                ] || "#123456",
-                0.2
-              )} !important`,
-              width: `${width}px`,
-              height: `${this.pd.rowHeight}px`,
-              top: `${this.pd.headerHeight +
-                this.pd.rowHeight * this.gd.selectIndex}px`
-            }
-          })
-        : null;
     }
   }
 };

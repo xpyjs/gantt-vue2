@@ -34,6 +34,12 @@ export default {
       }
     },
 
+    // 居中显示
+    center: {
+      type: Boolean,
+      default: false
+    },
+
     // 是否合并，一个函数，抛出当前数据，接收true / false，true为合并当前行，与前置列合并
     merge: {
       type: [Function, Boolean],
@@ -195,7 +201,10 @@ export default {
           "div",
           {
             class: { "gt-column__chunk": true },
-            style: { "--row-height": `${this.pd.rowHeight}px` }
+            style: {
+              "--row-height": `${this.pd.rowHeight}px`,
+              "justify-content": this.center ? "center" : "flex-start"
+            }
           },
           this.isCustomScoped
             ? this.$scopedSlots.default(this.scopeData)

@@ -261,6 +261,7 @@ export default {
       return parseNumber(this.border, 1);
     },
 
+    // 这样就只渲染一次
     rowFlatData: function() {
       return this.gd.flatData;
     }
@@ -268,8 +269,17 @@ export default {
 
   watch: {
     data: function(nv) {
-      this.gd.diffData(nv, this.dataOptions);
+      let item = null;
+      const select = this.gd.selectIndex;
+      if (select > -1) item = this.rowFlatData[select];
+
+      this.gd.diffData(nv, this.dataOptions, item);
       this.setHeaders();
+
+      // 数据发生变化，如果 selectIndex 变为 -1，表示数据已经被删除，选择的行内容需要抛出清空
+      if (select > -1 && this.gd.selectIndex === -1) {
+        this.$emit("row-click", null);
+      }
     },
 
     levelColor() {

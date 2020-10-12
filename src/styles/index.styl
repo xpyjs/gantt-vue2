@@ -63,27 +63,12 @@
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
   opacity 0
 
-// 麻蛋的，animation.css按官方文档写的，不生效，自己封装的倒是管用。
-.fade-in-right
-  animation fadeInRight 0.5s
+.update-data-item
+    transition all 0.5s
 
-.fade-out-right
-  animation fadeOutRight 0.5s
-
-.fade-in-left
-  animation fadeInLeft 0.5s
-
-.fade-out-left
-  animation fadeOutLeft 0.5s
-
-.fade-in-up
-  animation fadeInUp 0.5s
-
-.fade-out-up
-  animation fadeOutUp 0.5s
-
-.fade-in-down
+.update-data-enter, .update-data-leave-to
   animation fadeInDown 0.5s
 
-.fade-out-down
-  animation fadeOutDown 0.5s
+.update-data-leave-active
+    position absolute
+    animation fadeOutUp 0.5s

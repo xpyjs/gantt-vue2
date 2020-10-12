@@ -53,7 +53,13 @@
         </template>
       </JGanttColumn>
 
-      <JGanttColumn label="startDate" width="180" date-format :merge="merge4">
+      <JGanttColumn
+        label="startDate"
+        width="180"
+        center
+        date-format
+        :merge="merge4"
+      >
       </JGanttColumn>
 
       <JGanttColumn
@@ -75,7 +81,7 @@
       </JGanttColumn>
     </JGantt>
 
-    <button @click="handleClickTest">修改</button>
+    <button @click="handleClickModify">修改</button>
     <button @click="handleClickInsert">插入</button>
     <button @click="handleClickInsert2">插入2</button>
     <button @click="handleClickDelete">删除</button>
@@ -225,7 +231,7 @@ export default {
       return false;
     },
 
-    handleClickTest: function() {
+    handleClickModify: function() {
       Object.assign(this.dataList[0], {
         startDate: "2020-08-10",
         endDate: "2020-09-21"

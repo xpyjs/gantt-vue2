@@ -116,9 +116,6 @@ export default {
           [this.renderRow(h, Row.name, this.rowData)]
         ),
 
-        this.renderRowHoverStrip(h, this.tableWidth),
-        this.renderRowSelectStrip(h, this.tableWidth),
-
         // 滚动条占位
         h("div", {
           style: { height: `${this.scrollBarHeight}px` }

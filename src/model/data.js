@@ -269,8 +269,14 @@ export class GD {
     return item;
   }
 
-  diffData(newData) {
+  // eslint-disable-next-line no-unused-vars
+  diffData(newData, options = {}, item = null) {
     this._diff(this.data, newData);
+
+    // 更新选择条
+    if (!item) return;
+    const t = this.flatData.find(x => x.uuid === item.uuid);
+    this.selectIndex = t?.uindex ?? -1;
   }
 
   _diff(originData, newData, parentNode = null) {
@@ -307,6 +313,7 @@ export class GD {
         }
       }
 
+      // 新节点超出了原有节点，直接创建新的节点即可
       if (originData[i] === void 0) {
         const item = this._createDataNode(
           newData[i],

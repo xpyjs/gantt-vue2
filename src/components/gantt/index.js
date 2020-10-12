@@ -269,9 +269,8 @@ export default {
           [
             <MoreBtn name="more" size={30} turn style={{ "z-index": 99 }} />,
             <transition
-              name="fade"
-              enter-active-class="fade-in-right"
-              leave-active-class="fade-out-right"
+              enter-active-class="animate__animated animate__fadeInRight"
+              leave-active-class="animate__animated animate__fadeOutRight"
             >
               {/* TODO: 希望是展开和收缩样式 */}
               {this.showMoreHandleArea
@@ -344,10 +343,7 @@ export default {
               });
             })
           ]
-        ),
-
-        this.renderRowHoverStrip(h, this.ganttWidth),
-        this.renderRowSelectStrip(h, this.ganttWidth)
+        )
       ]
     );
   }
