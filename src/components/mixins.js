@@ -145,7 +145,7 @@ export default {
           ] || "#ccc",
           0.2
         )} !important`,
-        transition: "all 0.1s"
+        transition: "background-color 0.1s"
       };
 
       // TODO: 合并展开的动画可以在好一些

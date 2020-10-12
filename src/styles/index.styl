@@ -57,18 +57,14 @@
   opacity 0
   transition opacity 0.2s
 
-.fade-enter-active .fade-leave-active
-  transition opacity 0.5s
-
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
-  opacity 0
-
 .gt-update-animate-item
-    transition all 0.5s
+    transition transform 0.5s
 
 .gt-update-animate-enter, .gt-update-animate-leave-to
-  animation fadeInDown 0.5s
+    height 0
 
 .gt-update-animate-leave-active
     position absolute
-    animation fadeOutUp 0.5s
+
+.gt-update-animate-enter-active
+    animation fadeInDown 1s

@@ -213,19 +213,6 @@ export default {
       }
       this.showMoreHandleArea = false;
     }
-
-    // beforeEnterTransition: function(el) {
-    //   el.style = "margin-left: 100px";
-    // },
-
-    // enterTransition: function(el) {
-    //   el.style = "margin-left: 0";
-    //   el.style = "transition all 0.5s";
-    // },
-
-    // afterEnterTransition: function(el) {
-    //   el.style = "margin-left: 0";
-    // }
   },
 
   components: {
@@ -313,6 +300,7 @@ export default {
           },
           [
             this.renderRow(h, Row.name, this.rowData),
+
             // 今天时间线
             this.isTodayInArea && this.pd.ganttOptions[Variables.key.showToday]
               ? h("div", {
