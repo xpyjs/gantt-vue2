@@ -150,7 +150,7 @@ export default {
 
       // TODO: 合并展开的动画可以在好一些
       return (
-        <transition-group tag="div" name="update-data">
+        <transition-group tag="div" name="gt-update-animate">
           {data.map(item => {
             const offsetTop = item.uindex * this.pd.rowHeight;
             const condition = top < offsetTop && offsetTop < bottom;
@@ -161,7 +161,7 @@ export default {
 
             return h(el, {
               key: item.uuid,
-              class: { "update-data-item": true },
+              class: { "gt-update-animate-item": true },
               style: style,
               props: { rowData: condition ? item : null }
             });
