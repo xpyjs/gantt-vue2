@@ -105,11 +105,26 @@ export default {
       );
     },
 
-    isCustomScoped: function() {
+    isCustomDefaultScoped: function() {
       return (
         this.$scopedSlots &&
         Object.prototype.hasOwnProperty.call(this.$scopedSlots, "default")
       );
+    },
+
+    isCustomContentScoped: function() {
+      return (
+        this.$scopedSlots &&
+        Object.prototype.hasOwnProperty.call(this.$scopedSlots, "content")
+      );
+    },
+
+    sliderContent: function() {
+      return this.isCustomDefaultScoped
+        ? this.$scopedSlots.default(this.scopeData)
+        : this.isCustomContentScoped
+        ? this.$scopedSlots.content(this.scopeData)
+        : this.textData;
     }
   },
 
@@ -237,8 +252,10 @@ export default {
           "div",
           {
             class: {
-              "gt-slider-content": true,
-              "gt-noselect": true
+              "gt-slider-content": !this.isCustomContentScoped,
+              "gt-custom-slider-content": this.isCustomContentScoped,
+              "gt-noselect": true,
+              "gt-text-nowrap": true
             },
             style: {
               "justify-content": this.realAlignment
@@ -249,13 +266,7 @@ export default {
               }
             }
           },
-          [
-            <div class="gt-text-nowrap">
-              {this.isCustomScoped
-                ? this.$scopedSlots.default(this.scopeData)
-                : this.textData}
-            </div>
-          ]
+          this.sliderContent
         ),
         h("div", {
           class: { "gt-slider-ctrl__left": true },

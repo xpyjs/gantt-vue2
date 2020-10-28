@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" :style="{ 'background-color': changeBg ? 'black' : 'white' }">
     <JGantt
       header-height="60"
       row-height="30"
@@ -30,8 +30,12 @@
         :resize-right="true"
         :linked-resize="true"
       >
-        <template v-slot="data">
-          <div>{{ data.name }}</div>
+        <template v-slot:content="data">
+          <div
+            style="background-color: #123456;display: flex;justify-content: center"
+          >
+            {{ data.name }} - {{ data.index }}
+          </div>
         </template>
       </JGanttSlider>
 
@@ -81,6 +85,7 @@
       </JGanttColumn>
     </JGantt>
 
+    <button @click="handleClickBg">修改背景色</button>
     <button @click="handleClickModify">修改</button>
     <button @click="handleClickInsert">插入</button>
     <button @click="handleClickInsert2">插入2</button>
@@ -100,6 +105,7 @@ export default {
 
   data() {
     return {
+      changeBg: false,
       dataList: [],
       showCheckbox: true,
       showWeekend: true,
@@ -302,6 +308,10 @@ export default {
       this.bodyStyle = {
         bgColor: "grey"
       };
+    },
+
+    handleClickBg() {
+      this.changeBg = !this.changeBg;
     }
   }
 };
