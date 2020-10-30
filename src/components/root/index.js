@@ -180,7 +180,7 @@ export default {
     this.pd.setNodes(this.$slots.default);
 
     // 保存其他参数
-    this.saveParams();
+    this.saveParams(true);
   },
 
   beforeMount() {
@@ -324,19 +324,28 @@ export default {
   },
 
   methods: {
-    saveParams() {
+    saveParams(init = false) {
       this.pd.showCheckbox = this.showCheckbox;
       this.pd.showExpand = this.showExpand;
       this.pd.headerHeight = this.headerHeight;
-      this.pd.rowHeight = this.rowHeight;
       this.pd.levelColor = this.levelColor;
-      this.pd.setGanttOptions({
+
+      const opts = {
         [Variables.key.columnWidth]: this.ganttColumnWidth,
         [Variables.key.showToday]: this.showToday,
         [Variables.key.showWeekend]: this.showWeekend,
         [Variables.key.header]: this.headerStyle || {},
         [Variables.key.body]: this.bodyStyle || {}
-      });
+      };
+
+      if (init) {
+        this.pd.rowHeight = this.rowHeight;
+        Object.assign(opts, {
+          [Variables.key.columnWidth]: this.ganttColumnWidth
+        });
+      }
+
+      this.pd.setGanttOptions(opts);
     },
 
     setHeaders() {
