@@ -343,6 +343,12 @@ export default {
         Object.assign(opts, {
           [Variables.key.columnWidth]: this.ganttColumnWidth
         });
+      } else {
+        Object.assign(opts, {
+          [Variables.key.columnWidth]: this.pd.ganttOptions[
+            Variables.key.columnWidth
+          ]
+        });
       }
 
       this.pd.setGanttOptions(opts);
