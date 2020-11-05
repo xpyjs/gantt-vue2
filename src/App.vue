@@ -26,16 +26,22 @@
         empty-data=""
         bg-color="orange"
         :move="true"
-        :resize-left="false"
+        :resize-left="true"
         :resize-right="true"
         :linked-resize="true"
       >
         <template v-slot:content="data">
           <div
-            style="background-color: #123456;display: flex;justify-content: center"
+            style="background-color: #123456;display: flex;justify-content: center;height:5px"
           >
             {{ data.name }} - {{ data.index }}
           </div>
+        </template>
+        <template v-slot:left>
+          <div style="background-color:#123456;width:5px;height:10px" />
+        </template>
+        <template v-slot:right>
+          <div style="background-color:#123456;width:5px;height:10px" />
         </template>
       </JGanttSlider>
 

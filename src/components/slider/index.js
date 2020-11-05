@@ -119,6 +119,20 @@ export default {
       );
     },
 
+    isCustomLeftChunk: function() {
+      return (
+        this.$scopedSlots &&
+        Object.prototype.hasOwnProperty.call(this.$scopedSlots, "left")
+      );
+    },
+
+    isCustomRightChunk: function() {
+      return (
+        this.$scopedSlots &&
+        Object.prototype.hasOwnProperty.call(this.$scopedSlots, "right")
+      );
+    },
+
     sliderContent: function() {
       return this.isCustomDefaultScoped
         ? this.$scopedSlots.default(this.scopeData)
@@ -239,7 +253,7 @@ export default {
         style: {
           width: `${this.sliderWidth}px`,
           left: `${this.sliderLeft}px`,
-          "background-color": this.bgColor
+          "background-color": !this.isCustomContentScoped ? this.bgColor : ""
         },
         on: {
           mousedown: this.move ? this.onMouseDown : () => {},
@@ -268,26 +282,65 @@ export default {
           },
           this.sliderContent
         ),
-        h("div", {
-          class: { "gt-slider-ctrl__left": true },
-          style: {
-            "background-color": this.bgColor,
-            ...this.getMoveChunkStyle(this.showCtrlChunk && this.resizeLeft)
-          },
-          on: {
-            mousedown: this.resizeLeft ? this.onLeftChunkMouseDown : () => {}
-          }
-        }),
-        h("div", {
-          class: { "gt-slider-ctrl__right": true },
-          style: {
-            "background-color": this.bgColor,
-            ...this.getMoveChunkStyle(this.showCtrlChunk && this.resizeRight)
-          },
-          on: {
-            mousedown: this.resizeRight ? this.onRightChunkMouseDown : () => {}
-          }
-        })
+        this.isCustomLeftChunk
+          ? h(
+              "div",
+              {
+                style: {
+                  position: "absolute",
+                  transition: "all 0.2s",
+                  left: "0",
+                  "z-index": "1",
+                  ...this.getMoveChunkStyle(
+                    this.showCtrlChunk && this.resizeLeft
+                  )
+                }
+              },
+              this.$scopedSlots.left(this.scopeData)
+            )
+          : h("div", {
+              class: { "gt-slider-ctrl__left": true },
+              style: {
+                "background-color": this.bgColor,
+                ...this.getMoveChunkStyle(this.showCtrlChunk && this.resizeLeft)
+              },
+              on: {
+                mousedown: this.resizeLeft
+                  ? this.onLeftChunkMouseDown
+                  : () => {}
+              }
+            }),
+
+        this.isCustomRightChunk
+          ? h(
+              "div",
+              {
+                style: {
+                  position: "absolute",
+                  transition: "all 0.2s",
+                  right: "0",
+                  "z-index": "1",
+                  ...this.getMoveChunkStyle(
+                    this.showCtrlChunk && this.resizeRight
+                  )
+                }
+              },
+              this.$scopedSlots.right(this.scopeData)
+            )
+          : h("div", {
+              class: { "gt-slider-ctrl__right": true },
+              style: {
+                "background-color": this.bgColor,
+                ...this.getMoveChunkStyle(
+                  this.showCtrlChunk && this.resizeRight
+                )
+              },
+              on: {
+                mousedown: this.resizeRight
+                  ? this.onRightChunkMouseDown
+                  : () => {}
+              }
+            })
       ]
     );
   }
