@@ -56,7 +56,11 @@ export default {
     return h(
       "div",
       {
-        class: { "gt-gantt-row": true },
+        class: {
+          "gt-gantt-row": true,
+          "gt-bg-dark": this.pd.dark,
+          "gt-gantt-content-border-dark": this.pd.dark
+        },
         style: {
           height: `${this.pd.rowHeight - 1}px`,
           "background-size": `${

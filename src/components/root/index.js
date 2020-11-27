@@ -167,6 +167,11 @@ export default {
       default: () => {
         return {};
       }
+    },
+
+    dark: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -270,14 +275,14 @@ export default {
   watch: {
     data: function(nv) {
       let item = null;
-      const select = this.gd.selectIndex;
+      const select = this.gd.selected.index;
       if (select > -1) item = this.rowFlatData[select];
 
       this.gd.diffData(nv, this.dataOptions, item);
       this.setHeaders();
 
       // 数据发生变化，如果 selectIndex 变为 -1，表示数据已经被删除，选择的行内容需要抛出清空
-      if (select > -1 && this.gd.selectIndex === -1) {
+      if (select > -1 && this.gd.selected.index === -1) {
         this.$emit("row-click", null);
       }
     },
@@ -320,6 +325,10 @@ export default {
 
     bodyStyle() {
       this.saveParams();
+    },
+
+    dark() {
+      this.saveParams();
     }
   },
 
@@ -329,6 +338,7 @@ export default {
       this.pd.showExpand = this.showExpand;
       this.pd.headerHeight = this.headerHeight;
       this.pd.levelColor = this.levelColor;
+      this.pd.dark = this.dark;
 
       const opts = {
         [Variables.key.columnWidth]: this.ganttColumnWidth,
@@ -464,7 +474,7 @@ export default {
      * 单击行
      */
     IFClickRow: function(data) {
-      this.gd.selectIndex = data.uindex;
+      this.gd.selected = { index: data.uindex, uuid: data.uuid };
       this.$emit("row-click", { ...data.data });
     },
 
@@ -509,7 +519,10 @@ export default {
     return h(
       "div",
       {
-        class: { "gt-root": true },
+        class: {
+          "gt-root": true,
+          "gt-bg-dark": this.dark
+        },
         style: {
           "--root-border": `${this.realBorder}px`
         }
@@ -519,6 +532,7 @@ export default {
         h("div", {
           class: {
             "gt-column-slider-line": true,
+            "gt-header-border-dark": this.dark,
             "gt-hide": !this.columnSliderVisible
           },
           style: {
@@ -528,7 +542,10 @@ export default {
 
         // 表格右侧的移动线
         h("div", {
-          class: { "gt-table-slider-line": true },
+          class: {
+            "gt-table-slider-line": true,
+            "gt-table-slider-line-dark": this.dark
+          },
           style: {
             left: `${this.tableWidth - 2}px`
           },
@@ -563,7 +580,10 @@ export default {
 
         // 操作抽屉
         h(OperationDrawer.name, {
-          props: { showDrawer: this.showOperationDrawer }
+          props: {
+            showDrawer: this.showOperationDrawer,
+            settingsSlot: this.$slots?.settings?.[0]
+          }
         }),
 
         // 整体的遮罩层

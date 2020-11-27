@@ -72,7 +72,6 @@ export default {
     align-items center
     justify-content center
     margin auto 0 auto 5px
-    background-color #fff
     border 1px solid rgba(200, 200, 200, 0.8)
     border-radius 5px
 </style>

@@ -42,7 +42,11 @@ export default {
     return h(
       "div",
       {
-        class: { "gt-table-row": true },
+        class: {
+          "gt-table-row": true,
+          "gt-bg-dark": this.pd.dark,
+          "gt-content-border-dark": this.pd.dark
+        },
         style: {
           height: `${this.pd.rowHeight - 1}px`,
           "border-color": `${

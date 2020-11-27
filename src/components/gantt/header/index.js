@@ -47,7 +47,12 @@ export default {
     return h(
       "div",
       {
-        class: { "gt-gantt-header": true, "gt-noselect": true },
+        class: {
+          "gt-gantt-header": true,
+          "gt-noselect": true,
+          "gt-header-border-dark": this.pd.dark,
+          "gt-header-bg-dark": this.pd.dark
+        },
         style: {
           "--header-height": `${this.pd.headerHeight}px`,
           "background-color": `${
@@ -68,9 +73,12 @@ export default {
           return h(
             "div",
             {
-              class: { "gt-gantt-header-chunk": true },
+              class: {
+                "gt-gantt-header-chunk": true,
+                "gt-header-border-dark": this.pd.dark
+              },
               style: {
-                width: `${this.colWidth - 1}px`,
+                width: `${this.colWidth}px`,
                 "border-color": `${
                   this.pd.ganttOptions[Variables.key.header][
                     Variables.key.borderColor

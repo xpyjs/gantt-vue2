@@ -64,6 +64,7 @@ export class PD {
     this.expandWidth = 15;
     this.showCheckbox = false;
     this.showExpand = false;
+    this.dark = false;
 
     // 默认值
     this._gos = {

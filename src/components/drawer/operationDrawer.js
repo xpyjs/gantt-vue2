@@ -9,10 +9,7 @@ export default {
 
   props: {
     showDrawer: Boolean,
-    width: {
-      type: Number,
-      default: 200
-    }
+    settingsSlot: [Object, undefined]
   },
 
   beforeCreate() {},
@@ -21,7 +18,9 @@ export default {
 
   beforeMount() {},
 
-  mounted() {},
+  mounted() {
+    this.drawerWidth = this.$refs.drawer.clientWidth;
+  },
 
   beforeDestroy() {},
 
@@ -30,7 +29,9 @@ export default {
   inject: ["pd", "gd"],
 
   data() {
-    return {};
+    return {
+      drawerWidth: 2000
+    };
   },
 
   computed: {},
@@ -63,53 +64,62 @@ export default {
   },
 
   components: {
-    [Slider.name]: Slider
+    [Slider.name]: Slider,
+    [Line.name]: Line
   },
 
   render() {
     return (
       <div
-        class="gt-operation-drawer"
+        ref="drawer"
+        class={{
+          "gt-operation-drawer": true,
+          "gt-bg-dark": this.pd.dark,
+          "gt-text-dark": this.pd.dark
+        }}
         style={{
-          width: `${this.width}px`,
+          "min-width": "200px",
           // 多出10，可以隐藏drawer的阴影部分
-          right: this.showDrawer ? "0" : `-${this.width + 10}px`
+          right: this.showDrawer ? `${0}px` : `-${this.drawerWidth + 10}px`
         }}
       >
-        <div class="gt-drawer-item-wrap">
-          <div class="gt-text-title" style={{ "margin-left": "20px" }}>
-            修改甘特列宽
+        {/* 系统设置 */}
+        <div>
+          <div class="gt-text-title" style={{ "margin-bottom": "20px" }}>
+            系统设置
           </div>
-          <Slider
-            value={parseInt(this.pd.ganttOptions[Variables.key.columnWidth])}
-            onChange={this.handleChangeColWidth}
-            min={Variables.size.defaultMinGanttColumnWidth}
-            max={Variables.size.defaultMaxGanttColumnWidth}
-            style={{ margin: "5px 20px 10px 20px" }}
-          />
-          <Line />
-        </div>
-
-        <div class="gt-drawer-item-wrap">
-          <div class="gt-text-title" style={{ "margin-left": "20px" }}>
-            修改行高
+          <div style={{ display: "inline-block" }}>
+            <div class="gt-text-secondary-title">修改甘特列宽</div>
+            <Slider
+              value={parseInt(this.pd.ganttOptions[Variables.key.columnWidth])}
+              onChange={this.handleChangeColWidth}
+              min={Variables.size.defaultMinGanttColumnWidth}
+              max={Variables.size.defaultMaxGanttColumnWidth}
+              style={{ margin: "5px 20px 10px 20px" }}
+            />
           </div>
-          <Slider
-            value={parseInt(this.pd.rowHeight)}
-            onChange={this.handleChangeRowHeight}
-            min={Variables.size.defaultMinContentRowHeight}
-            max={Variables.size.defaultMaxContentRowHeight}
-            style={{ margin: "5px 20px 10px 20px" }}
-          />
-          <Line />
-        </div>
 
-        {/* 重置按钮 */}
-        <div class="gt-drawer-item-wrap">
+          <div style={{ display: "inline-block" }}>
+            <div class="gt-text-secondary-title">修改行高</div>
+            <Slider
+              value={parseInt(this.pd.rowHeight)}
+              onChange={this.handleChangeRowHeight}
+              min={Variables.size.defaultMinContentRowHeight}
+              max={Variables.size.defaultMaxContentRowHeight}
+              style={{ margin: "5px 20px 10px 20px" }}
+            />
+          </div>
+
+          {/* 重置按钮 */}
           <button class="gt-drawer-reset-btn" onclick={this.handleReset}>
             重置
           </button>
         </div>
+
+        <Line />
+
+        {/* 个人设置，插槽 */}
+        {this.settingsSlot && this.settingsSlot}
       </div>
     );
   }

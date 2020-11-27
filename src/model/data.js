@@ -180,8 +180,8 @@ export class GD {
     this._hierarchy = 0;
 
     // 渲染使用
-    this.selectIndex = -1;
-    this.hoverIndex = -1;
+    this.selected = { index: -1, uuid: -1 };
+    this.hovered = { index: -1, uuid: -1 };
 
     // 可展示的数据条数
     this.length = 0;
@@ -276,7 +276,7 @@ export class GD {
     // 更新选择条
     if (!item) return;
     const t = this.flatData.find(x => x.uuid === item.uuid);
-    this.selectIndex = t?.uindex ?? -1;
+    this.selected = { index: t?.uindex ?? -1, id: t?.id ?? -1 };
   }
 
   _diff(originData, newData, parentNode = null) {

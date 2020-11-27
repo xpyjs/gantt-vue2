@@ -1,3 +1,5 @@
+@import "./light.styl"
+
 // 隐藏元素，但保留位置
 .gt-hide
   visibility hidden
@@ -41,6 +43,24 @@
   -webkit-touch-callout none
   cursor default !important
 
+.gt-bg-dark
+  background-color lighten(invert($default-content-background-color), 10%) !important
+
+.gt-header-bg-dark
+  background-color invert($default-header-background-color) !important
+
+.gt-text-dark
+  color invert($default-text-color) !important
+
+.gt-header-border-dark
+  border-color darken(invert($default-header-border-color), 30%) !important
+
+gtContentBorderDark()
+  return invert($default-content-border-color)
+
+.gt-content-border-dark
+  border-color gtContentBorderDark()
+
 .gt-animation
   transition all 0.1s
 
@@ -58,13 +78,13 @@
   transition opacity 0.2s
 
 .gt-update-animate-item
-    transition transform 0.5s
+  transition transform 0.5s
 
 .gt-update-animate-enter, .gt-update-animate-leave-to
-    height 0
+  height 0
 
 .gt-update-animate-leave-active
-    position absolute
+  position absolute
 
 .gt-update-animate-enter-active
-    animation fadeInDown 1s
+  animation fadeInDown 1s

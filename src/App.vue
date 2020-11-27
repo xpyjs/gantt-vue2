@@ -1,14 +1,15 @@
 <template>
-  <div id="app" :style="{ 'background-color': changeBg ? 'black' : 'white' }">
+  <div id="app">
     <JGantt
       header-height="60"
       row-height="30"
       data-index="index"
+      expand-all
+      :dark="isDark"
       :show-checkbox="showCheckbox"
       :show-weekend="showWeekend"
       :show-today="showToday"
       :show-expand="showExpand"
-      expand-all
       :data="dataList"
       :header-style="headerStyle"
       :body-style="bodyStyle"
@@ -89,6 +90,13 @@
       <JGanttColumn label="picture12345" :merge="merge5">
         <template v-slot="data"> 👀😃✨✔🐱‍🚀🐱‍👓 {{ data.ttt.b }} </template>
       </JGanttColumn>
+
+      <template v-slot:settings>
+        <div>
+          <p>标题</p>
+          <input />
+        </div>
+      </template>
     </JGantt>
 
     <button @click="handleClickBg">修改背景色</button>
@@ -111,7 +119,7 @@ export default {
 
   data() {
     return {
-      changeBg: false,
+      isDark: false,
       dataList: [],
       showCheckbox: true,
       showWeekend: true,
@@ -120,11 +128,9 @@ export default {
       levelColor: ["azure", "cornsilk"],
       headerStyle: {
         bgColor: "",
-        borderColor: "",
         textColor: ""
       },
       bodyStyle: {
-        bgColor: "",
         borderColor: "",
         textColor: "",
         todayColor: "",
@@ -317,7 +323,7 @@ export default {
     },
 
     handleClickBg() {
-      this.changeBg = !this.changeBg;
+      this.isDark = !this.isDark;
     }
   }
 };

@@ -134,7 +134,11 @@ export default {
     return h(
       "div",
       {
-        class: { "gt-column": true, "gt-noselect": !this.selectable },
+        class: {
+          "gt-column": true,
+          "gt-noselect": !this.selectable,
+          "gt-content-border-dark": this.pd.dark
+        },
         style: {
           "--column-width": `${this.colWidth - 1}px`,
           "border-color": `${

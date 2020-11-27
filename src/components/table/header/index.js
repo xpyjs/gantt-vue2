@@ -87,7 +87,12 @@ export default {
     return h(
       "div",
       {
-        class: { "gt-table-header": true, "gt-noselect": true },
+        class: {
+          "gt-table-header": true,
+          "gt-noselect": true,
+          "gt-header-border-dark": this.pd.dark,
+          "gt-header-bg-dark": this.pd.dark
+        },
         style: {
           "--header-height": `${this.pd.headerHeight}px`,
           "background-color": `${
@@ -107,7 +112,10 @@ export default {
         return h(
           "div",
           {
-            class: { "gt-table-header-chunk": true },
+            class: {
+              "gt-table-header-chunk": true,
+              "gt-header-border-dark": this.pd.dark
+            },
             style: {
               width: `${item.width - 1}px`,
               "border-color": `${

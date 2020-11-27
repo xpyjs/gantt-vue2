@@ -115,11 +115,11 @@ export default {
     },
 
     onMouseEnterRow: function() {
-      this.gd.hoverIndex = this.rowData.uindex;
+      this.gd.hovered = { index: this.rowData.uindex, uuid: this.rowData.uuid };
     },
 
     onMouseLeaveRow: function() {
-      this.gd.hoverIndex = -1;
+      this.gd.hovered = { index: -1, uuid: -1 };
     },
 
     // 渲染行
@@ -155,8 +155,16 @@ export default {
             const offsetTop = item.uindex * this.pd.rowHeight;
             const condition = top < offsetTop && offsetTop < bottom;
 
-            const ss = this.gd.selectIndex === item.uindex ? selectStyle : {};
-            const hs = this.gd.hoverIndex === item.uindex ? hoverStyle : {};
+            const ss =
+              this.gd.selected.index === item.uindex &&
+              this.gd.selected.uuid === item.uuid
+                ? selectStyle
+                : {};
+            const hs =
+              this.gd.hovered.index === item.uindex &&
+              this.gd.hovered.uuid === item.uuid
+                ? hoverStyle
+                : {};
             const style = { ...ss, ...hs };
 
             return h(el, {
