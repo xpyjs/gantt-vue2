@@ -1,6 +1,6 @@
 {
   "name": "jz-gantt",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "A simple gantt by Vue",
   "author": "jeremyjone",
   "license": "MIT",
