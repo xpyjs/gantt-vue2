@@ -506,6 +506,14 @@ export default {
      */
     INoTodayError: function() {
       this.$emit("no-today-error");
+    },
+
+    // ===== 对外方法 =====
+    /**
+     * 使选择一行
+     */
+    setSelected: function(data) {
+      this.gd.setSelected(data);
     }
   },
 

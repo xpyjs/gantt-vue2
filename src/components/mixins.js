@@ -58,10 +58,11 @@ export default {
 
     // 行背景颜色，如果用户主动给出
     rowBackgroundColor: function() {
-      return function(color = "#fff") {
+      return function(color) {
+        color = this.pd.dark ? "black" : "white";
         if (this.rowData) {
           const c = this.pd.levelColor[this.rowData.level] || color;
-          return { "background-color": c };
+          return { "background-color": `${c} !important` };
         }
       };
     }

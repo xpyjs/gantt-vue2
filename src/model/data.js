@@ -355,4 +355,21 @@ export class GD {
       }
     }
   }
+
+  setSelected(data) {
+    const fn = d => {
+      if (isArray(d)) {
+        for (let i = 0; i < d.length; i++) {
+          if (d[i].isSame(data)) {
+            this.selected = { index: d[i].uindex, uuid: d[i].uuid };
+            break;
+          } else if (d[i].children) {
+            fn(d[i].children);
+          }
+        }
+      }
+    };
+
+    fn(this.data);
+  }
 }

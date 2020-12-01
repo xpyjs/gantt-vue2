@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <JGantt
+      ref="gantt"
       header-height="60"
       row-height="30"
       data-index="index"
@@ -109,6 +110,7 @@
     <button @click="() => (showWeekend = !showWeekend)">显示weekend</button>
     <button @click="() => (showToday = !showToday)">显示today</button>
     <button @click="() => (showExpand = !showExpand)">显示expand</button>
+    <button @click="setSelected">设置选择</button>
   </div>
 </template>
 
@@ -324,6 +326,10 @@ export default {
 
     handleClickBg() {
       this.isDark = !this.isDark;
+    },
+
+    setSelected() {
+      this.$refs.gantt.setSelected(this.dataList[0]);
     }
   }
 };
