@@ -495,10 +495,11 @@ export default {
     /**
      * 移动甘特滑块
      * @param {Row} data
+     * @param {Date, Date} old
      */
-    IFMoveSlider: function(data) {
+    IFMoveSlider: function(data, old) {
       // 抛出接口事件
-      this.$emit("move-slider", { ...data.data });
+      this.$emit("move-slider", { ...data.data }, old);
     },
 
     /**

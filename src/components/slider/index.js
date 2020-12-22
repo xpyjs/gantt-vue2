@@ -97,7 +97,8 @@ export default {
      */
     sliderLeft: function() {
       // 最左侧一定是一个整天的宽度，将时间调整为0时，保证没有位移。非0会产生位移
-      const sd = new Date(formatDate(this.gd.start)).setHours(0);
+      let sd = new Date(formatDate(this.gd.start));
+      sd = sd.setHours(0) - sd.getTimezoneOffset();
       return (
         (getDateInterval(sd, this.$parent.rowData.start) /
           Variables.time.millisecondOfDay) *
@@ -211,7 +212,10 @@ export default {
       document.onmouseup = () => {
         document.onmousemove = document.onmouseup = null;
 
-        this.root.IFMoveSlider(this.$parent.rowData);
+        this.root.IFMoveSlider(this.$parent.rowData, {
+          start: srcStartDate,
+          end: srcEndDate
+        });
         this.setBetweenDate();
       };
     },
