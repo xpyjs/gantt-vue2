@@ -7,13 +7,13 @@ process.env.NODE_ENV = "production";
 module.exports = {
   mode: "production",
   entry: {
-    main: path.resolve(__dirname, "./src/index.js") // 将src下的index.js 作为入口点
+    main: path.resolve(__dirname, "./src/index.js") // 将src下的 index.js 作为入口点
   },
   output: {
     path: path.resolve(__dirname, "./lib"),
     publicPath: "/lib/",
-    filename: "jz-gantt.min.js",
-    library: "jz-gantt",
+    filename: "gantt-vue2.min.js",
+    library: "gantt-vue2",
     libraryTarget: "umd",
     umdNamedDefine: true
   },

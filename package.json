@@ -1,17 +1,39 @@
 {
-  "name": "jz-gantt",
-  "version": "0.0.17",
-  "description": "A simple gantt by Vue",
+  "name": "@xpyjs/gantt-vue2",
+  "version": "1.0.0",
+  "description": "A high-performance vue2 gantt component.",
   "author": "jeremyjone",
   "license": "MIT",
   "private": false,
-  "main": "lib/jz-gantt.umd.min.js",
+  "homepage": "https://docs.xiaopangying.com/gantt/docs/vue2",
+  "bugs": {
+    "url": "https://github.com/xpyjs/gantt-vue2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xpyjs/gantt-vue2.git"
+  },
+  "keywords": [
+    "vue",
+    "vue2",
+    "gantt",
+    "vue-gantt"
+  ],
+  "files": [
+    "lib",
+    "src",
+    "types",
+    "public",
+    "package.json",
+    "README.md"
+  ],
+  "main": "lib/gantt-vue2.umd.min.js",
   "typings": "types/index.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "lib": "vue-cli-service build --config ./webpack.config.js --target lib --name jz-gantt --dest lib src/index.js"
+    "lib": "vue-cli-service build --config ./webpack.config.js --target lib --name gantt-vue2 --dest lib src/index.js"
   },
   "dependencies": {
     "animate.css": "^4.1.0",

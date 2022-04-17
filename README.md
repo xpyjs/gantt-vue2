@@ -1,15 +1,26 @@
-# JzGantt
+# XGantt For vue2
 
 version: 1.0
 
-A simple gantt component by vue.
+A high-performance vue2 gantt component.
 ![vue 2.x](https://img.shields.io/badge/vue-2.x-43B984) ![animate.css](https://img.shields.io/badge/animate.css-4.x-9E84E2)
+
+## Important
+
+This repo is previous `jz-gantt`. Only vue2 version.
+
+### How to update
+
+1. package name changed. `@xpyjs/gantt-vue2` replaced `jz-gantt`.
+2. All `j-` or `J` prefix updpate to `x-` or `X`.
+
+Beyond that, no other action is required.
 
 ## Snipaste
 
 ![Snipaste](./src/assets/Snipaste.png)
 
-## What is JzGantt
+## What is XGantt
 
 - [x] Custom table column content
 - [x] Custom gantt row content
@@ -22,24 +33,24 @@ A simple gantt component by vue.
 ### install
 
 ```bash
-npm install jz-gantt --save
+npm install @xpyjs/gantt-vue2 --save
 ```
 
 ### use
 
 ```js
 import Vue from "vue";
-import Gantt from "jz-gantt";
-import "jz-gantt/lib/jz-gantt.css";
+import XGantt from "@xpyjs/gantt-vue2";
+import "@xpyjs/gantt-vue2/lib/gantt-vue2.css";
 
-Vue.use(Gantt);
+Vue.use(XGantt);
 ```
 
 ## Document
 
-For resource code, see [Github](http://github.com/jeremyjone/jz-gantt)
+For resource code, see [Github](http://github.com/xpyjs/gantt-vue2)
 
-For more detailed documentation, see [document web](https://jeremyjone.github.io/docs/document/gantt/)
+For more detailed documentation, see [document web](https://docs.xiaopangying.com/gantt/docs/vue2)
 
 ### Basic use
 
@@ -81,7 +92,7 @@ const dataList = [
 ```
 
 ```html
-<j-gantt
+<x-gantt
     data-index="index"
     :data="dataList"
 />
@@ -89,31 +100,31 @@ const dataList = [
 
 ### Use table column
 
-We provide a slot named `JGanttColumn`. `Label` is required, and it should match data key.
+We provide a slot named `XGanttColumn`. `Label` is required, and it should match data key.
 
 ```html
-<j-gantt
+<x-gantt
     data-index="index"
     :data="dataList"
 >
-    <j-gantt-column label="index" />
-</j-gantt>
+    <x-gantt-column label="index" />
+</x-gantt>
 ```
 
 ### Use gantt slider
 
-We provide a slot named `JGanttSlider`.
+We provide a slot named `XGanttSlider`.
 
 Only one slider whill be rendered. If you insert more than one slider, only last slider will be display.
 
 ```html
-<j-gantt
+<x-gantt
     data-index="index"
     :data="dataList"
 >
-    <j-gantt-slider />  <!-- no render -->
-    <j-gantt-slider />  <!-- will be rendered -->
-</j-gantt>
+    <x-gantt-slider />  <!-- no render -->
+    <x-gantt-slider />  <!-- will be rendered -->
+</x-gantt>
 ```
 
 ## License

@@ -1,6 +1,6 @@
-import { JGanttComponent } from "../component";
+import { XGanttComponent } from "../component";
 
-export declare class JGanttRootComponent extends JGanttComponent {
+export declare class XGanttRootComponent extends XGanttComponent {
   bodyStyle: {
     bgColor: string;
     borderColor: string;

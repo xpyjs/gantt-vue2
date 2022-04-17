@@ -3,15 +3,15 @@ export const Variables = {
   noData: "无数据 😢",
 
   name: {
-    root: "JGantt",
-    column: "JGanttColumn",
-    slider: "JGanttSlider",
-    table: "JTableContent",
-    gantt: "JGanttContent",
-    tableHeader: "JTableHeader",
-    ganttHeader: "JGanttHeader",
-    tableRow: "JContentTableRow",
-    ganttRow: "JContentGanttRow"
+    root: "XGantt",
+    column: "XGanttColumn",
+    slider: "XGanttSlider",
+    table: "XTableContent",
+    gantt: "XGanttContent",
+    tableHeader: "XTableHeader",
+    ganttHeader: "XGanttHeader",
+    tableRow: "XContentTableRow",
+    ganttRow: "XContentGanttRow"
   },
 
   key: {

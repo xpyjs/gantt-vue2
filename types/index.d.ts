@@ -1,4 +1,4 @@
-export * from "./j-gantt";
-import * as JGantt from "./j-gantt";
+export * from "./x-gantt";
+import * as XGantt from "./x-gantt";
 
-export default JGantt;
+export default XGantt;

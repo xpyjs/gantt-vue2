@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <JGantt
+    <XGantt
       header-height="60"
       row-height="30"
       data-index="index"
@@ -35,7 +35,7 @@
       @move-slider="moveSlider"
       @no-today-error="noTodayError"
     >
-      <JGanttSlider
+      <XGanttSlider
         flat
         label="startDate"
         date-format="MM-dd H:mm:s"
@@ -49,26 +49,26 @@
         <template v-slot="data">
           <div>{{ data.name }}</div>
         </template>
-      </JGanttSlider>
+      </XGanttSlider>
 
-      <JGanttColumn label="index" :merge="merge3" />
+      <XGanttColumn label="index" :merge="merge3" />
 
-      <JGanttColumn label="name" width="150" :merge="merge3">
+      <XGanttColumn label="name" width="150" :merge="merge3">
         <template v-slot="data">
           <div>2 - {{ data }}</div>
         </template>
-      </JGanttColumn>
+      </XGanttColumn>
 
-      <JGanttColumn label="aaa" date-format :merge="merge5">
+      <XGanttColumn label="aaa" date-format :merge="merge5">
         <template>
           <div v-for="i in 100" :key="i">{{ i }}</div>
         </template>
-      </JGanttColumn>
+      </XGanttColumn>
 
-      <JGanttColumn label="startDate" width="180" date-format :merge="merge4">
-      </JGanttColumn>
+      <XGanttColumn label="startDate" width="180" date-format :merge="merge4">
+      </XGanttColumn>
 
-      <JGanttColumn
+      <XGanttColumn
         label="endDate"
         name="自定义标签"
         width="200"
@@ -80,12 +80,12 @@
             abc - {{ data.endDate }}
           </span>
         </template>
-      </JGanttColumn>
+      </XGanttColumn>
 
-      <JGanttColumn label="picture12345" :merge="merge5">
+      <XGanttColumn label="picture12345" :merge="merge5">
         <template v-slot="data"> 👀😃✨✔🐱‍🚀🐱‍👓 {{ data.ttt.b }} </template>
-      </JGanttColumn>
-    </JGantt>
+      </XGanttColumn>
+    </XGantt>
 
     <button @click="handleClickTest">修改</button>
     <button @click="handleClickInsert">插入</button>

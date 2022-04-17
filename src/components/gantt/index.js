@@ -28,8 +28,8 @@ export default {
   beforeMount() {
     // 动态添加功能按钮，顺序：右 → 左
     this.moreButtons = [
-      { icon: "jz_operation", action: this.handleClickOperationBtn },
-      { icon: "jz_today", action: this.handleClickTodayBtn }
+      { icon: "x_operation", action: this.handleClickOperationBtn },
+      { icon: "x_today", action: this.handleClickTodayBtn }
     ];
   },
 
@@ -254,7 +254,7 @@ export default {
             }
           },
           [
-            <MoreBtn icon="jz_more" size={30} turn style={{ "z-index": 99 }} />,
+            <MoreBtn icon="x_more" size={30} turn style={{ "z-index": 99 }} />,
             <transition
               enter-active-class="animate__animated animate__fadeInRight"
               leave-active-class="animate__animated animate__fadeOutRight"

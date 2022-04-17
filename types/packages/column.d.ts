@@ -1,6 +1,6 @@
-import { JGanttComponent } from "../component";
+import { XGanttComponent } from "../component";
 
-export declare class JGanttColumnComponent extends JGanttComponent {
+export declare class XGanttColumnComponent extends XGanttComponent {
   center: boolean;
   dateFormat: string;
   emptyData: string;
