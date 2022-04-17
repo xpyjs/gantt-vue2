@@ -4,6 +4,8 @@
 
 ![](https://img.shields.io/npm/v/@xpyjs/gantt-vue2.svg) ![](https://img.shields.io/npm/l/@xpyjs/gantt-vue2.svg)
 
+[[English](./README.md)] [[中文](./README_cn.md)]
+
 A high-performance vue2 gantt component.
 
 ## Important

@@ -4,6 +4,8 @@
 
 ![](https://img.shields.io/npm/v/@xpyjs/gantt-vue2.svg) ![](https://img.shields.io/npm/l/@xpyjs/gantt-vue2.svg)
 
+[[English](./README.md)] [[中文](./README_cn.md)]
+
 基于 vue2 的高性能甘特组件。
 
 ## 十分重要
