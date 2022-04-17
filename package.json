@@ -5,6 +5,10 @@
   "author": "jeremyjone",
   "license": "MIT",
   "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "homepage": "https://docs.xiaopangying.com/gantt/docs/vue2",
   "bugs": {
     "url": "https://github.com/xpyjs/gantt-vue2/issues"
