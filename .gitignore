@@ -1,7 +1,8 @@
 .DS_Store
 node_modules
+lib
 /dist
-
+.cz-config.js
 
 # local env files
 .env.local
