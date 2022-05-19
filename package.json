@@ -1,7 +1,38 @@
 {
-  "name": "xpy-gantt-vue2",
-  "version": "0.1.0",
-  "private": true,
+  "name": "@xpyjs/gantt-vue2",
+  "version": "1.0.0",
+  "description": "A high-performance vue2 gantt component.",
+  "author": "jeremyjone",
+  "license": "MIT",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "homepage": "https://docs.xiaopangying.com/gantt/docs/vue2",
+  "bugs": {
+    "url": "https://github.com/xpyjs/gantt-vue2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xpyjs/gantt-vue2.git"
+  },
+  "keywords": [
+    "vue",
+    "vue2",
+    "gantt",
+    "vue-gantt"
+  ],
+  "files": [
+    "lib",
+    "src",
+    "types",
+    "public",
+    "package.json",
+    "README.md"
+  ],
+  "main": "lib/gantt-vue2.umd.min.js",
+  "typings": "types/index.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
