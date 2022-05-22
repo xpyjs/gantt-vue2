@@ -2,11 +2,10 @@
  * @Author: JeremyJone
  * @Date: 2021-12-24 16:36:33
  * @LastEditors: JeremyJone
- * @LastEditTime: 2022-05-19 22:53:21
+ * @LastEditTime: 2022-05-21 02:20:31
  * @Description: 头部注释
  */
-
-import { ref, inject, provide, reactive, Ref } from '@vue/composition-api';
+import { ref, reactive, provide, inject, Ref } from '@vue/composition-api';
 import { GanttData } from '@/models/data/data';
 import { ParamData } from '@/models/param/param';
 import { Variables } from '@/constants/vars';
