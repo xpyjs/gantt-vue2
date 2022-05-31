@@ -672,6 +672,10 @@ export default defineComponent({
     ];
   },
 
+  mounted() {
+    console.log('mounted', this.$refs.gantt);
+  },
+
   methods: {
     rowClick(data: any) {
       console.log('click row data:', data);

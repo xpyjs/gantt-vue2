@@ -35,6 +35,7 @@ export default defineComponent({
 
     return {
       slots,
+      rootRef,
 
       setSelected,
       jumpToDate,
