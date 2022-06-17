@@ -3,6 +3,7 @@ import { isNumber } from 'lodash';
 import {
   computed,
   defineComponent,
+  getCurrentInstance,
   ref,
   toRaw,
   toRefs
@@ -31,8 +32,10 @@ export default defineComponent({
 
   props: sliderProps,
 
-  setup(props, { slots, attrs }) {
-    const data = attrs.data as Row;
+  setup(props, { slots }) {
+    // const rowData = attrs.data as Row;
+    const data = getCurrentInstance()?.parent?.props.rowData as Row;
+
     const {
       alignment,
       label,
@@ -114,7 +117,9 @@ export default defineComponent({
     const customContentScoped = computed(() => {
       let slot;
       // eslint-disable-next-line prefer-destructuring
-      if (slots?.content) slot = slots.content(scopeData(dateFormat?.value))[0];
+      if (slots?.content)
+        slot = slots.content(scopeData(dateFormat?.value))?.[0];
+
       // return slot && isSymbol(slot.type) ? undefined : slot;
       return slot && Object.prototype.hasOwnProperty.call(slot, 'content')
         ? slot
@@ -131,7 +136,8 @@ export default defineComponent({
     const sliderSlot = computed(() => {
       let slot;
       // eslint-disable-next-line prefer-destructuring
-      if (slots?.content) slot = slots.content(scopeData(dateFormat?.value))[0];
+      if (slots?.content)
+        slot = slots.content(scopeData(dateFormat?.value))?.[0];
       else if (slots?.default)
         // eslint-disable-next-line prefer-destructuring
         slot = slots.default(scopeData(dateFormat?.value))[0];
@@ -144,12 +150,12 @@ export default defineComponent({
 
     // 左侧移动块内容
     const leftChunkSlot = computed(() => {
-      return slots?.left && slots.left(scopeData(dateFormat?.value))[0];
+      return slots?.left && slots.left(scopeData(dateFormat?.value))?.[0];
     });
 
     // 右侧移动块内容
     const rightChunkSlot = computed(() => {
-      return slots?.right && slots.right(scopeData(dateFormat?.value))[0];
+      return slots?.right && slots.right(scopeData(dateFormat?.value))?.[0];
     });
 
     const contentClass = computed(() => {
@@ -415,8 +421,6 @@ export default defineComponent({
 
     return {
       data,
-      GtData,
-      GtParam,
       sliderStyle,
       sliderText,
       onMouseEnter,
@@ -436,69 +440,154 @@ export default defineComponent({
       rightChunkSlot,
       leftChunkSlot,
       sliderSlot,
+      progressValue,
+      showProgressBtn,
 
       isProgress,
       isCustomLeftChunkScoped,
       isCustomRightChunkScoped
     };
+  },
+
+  render(h) {
+    const {
+      data,
+      sliderStyle,
+      sliderText,
+      onMouseEnter,
+      onMouseLeave,
+      onMouseDown,
+      onLeftChunkMouseDown,
+      onRightChunkMouseDown,
+      onProgressBtnMouseDown,
+      rightChunkStyle,
+      leftChunkStyle,
+      progressStyle,
+      rightChunkClass,
+      leftChunkClass,
+      progressBackStyle,
+      contentStyle,
+      contentClass,
+      rightChunkSlot,
+      leftChunkSlot,
+      sliderSlot,
+      progressValue,
+      showProgressBtn,
+
+      isProgress,
+      isCustomLeftChunkScoped,
+      isCustomRightChunkScoped
+    } = this as any;
+
+    return h(
+      'div',
+      {
+        class: ['gt-slider', { 'gt-shadow': !this.flat }],
+        style: sliderStyle,
+        on: {
+          mouseenter: onMouseEnter,
+          mouseleave: onMouseLeave,
+          mousedown: (e: MouseEvent) => {
+            e.stopPropagation();
+            onMouseDown(e);
+          }
+        }
+      },
+      [
+        // 进度条
+        isProgress &&
+          h('div', {
+            class: contentClass,
+            style: progressBackStyle
+          }),
+        isProgress &&
+          h(
+            'div',
+            {
+              class: contentClass,
+              style: progressStyle
+            },
+            [
+              h(
+                'span',
+                {
+                  style: {
+                    color: 'gray',
+                    marginRight: '3px',
+                    transform: 'scale(0.7)'
+                  }
+                },
+                `${progressValue}%`
+              )
+            ]
+          ),
+
+        // 内容
+        h(
+          'div',
+          {
+            class: contentClass,
+            style: contentStyle,
+            on: {
+              selectstart: () => false
+            }
+          },
+          [sliderSlot || sliderText]
+        ),
+
+        // 左滑块
+        h(
+          'div',
+          {
+            class: ['gt-slider-chunk', leftChunkClass],
+            style: leftChunkStyle,
+            on: {
+              mousedown: (e: MouseEvent) => {
+                e.stopPropagation();
+                if (this.resizeLeft) onLeftChunkMouseDown(e);
+              }
+            }
+          },
+          [isCustomLeftChunkScoped ? leftChunkSlot : null]
+        ),
+
+        // 右滑块
+        h(
+          'div',
+          {
+            class: ['gt-slider-chunk', rightChunkClass],
+            style: rightChunkStyle,
+            on: {
+              mousedown: (e: MouseEvent) => {
+                e.stopPropagation();
+                if (this.resizeRight) onRightChunkMouseDown(e);
+              }
+            }
+          },
+          [isCustomRightChunkScoped ? rightChunkSlot : null]
+        ),
+
+        // 进度条拉块
+        isProgress &&
+          data.children.length === 0 &&
+          h('div', {
+            class: 'gt-slider-progress-btn',
+            style: {
+              left: `${progressValue}%`,
+              opacity: showProgressBtn ? 1 : 0
+            },
+            on: {
+              mousedown: (e: MouseEvent) => {
+                e.stopPropagation();
+                onProgressBtnMouseDown(e);
+              }
+            }
+          })
+      ]
+    );
   }
 });
 </script>
-
-<template>
-  <div
-    class="gt-slider"
-    :class="{ 'gt-shadow': !flat }"
-    :style="sliderStyle"
-    @mousedown.stop="onMouseDown"
-    @mouseenter="onMouseEnter"
-    @mouseleave="onMouseLeave"
-  >
-    <!-- 进度条 -->
-    <div v-if="isProgress" :class="contentClass" :style="progressBackStyle" />
-    <div v-if="isProgress" :class="contentClass" :style="progressStyle">
-      <span style="color: gray; margin-right: 3px; transform: scale(0.7)">
-        {{ progressValue }}%
-      </span>
-    </div>
-
-    <!-- 内容 -->
-    <div :class="contentClass" :style="contentStyle" @selectstart="() => false">
-      <component :is="sliderSlot" v-if="sliderSlot" />
-      <template v-else>
-        {{ sliderText }}
-      </template>
-    </div>
-
-    <!-- 左滑块 -->
-    <div
-      class="gt-slider-chunk"
-      :class="leftChunkClass"
-      :style="leftChunkStyle"
-      @mousedown.stop="e => (resizeLeft ? onLeftChunkMouseDown(e) : null)"
-    >
-      <component :is="leftChunkSlot" v-if="isCustomLeftChunkScoped" />
-    </div>
-
-    <!-- 右滑块 -->
-    <div
-      class="gt-slider-chunk"
-      :class="rightChunkClass"
-      :style="rightChunkStyle"
-      @mousedown.stop="e => (resizeRight ? onRightChunkMouseDown(e) : null)"
-    >
-      <component :is="rightChunkSlot" v-if="isCustomRightChunkScoped" />
-    </div>
-
-    <!-- 进度条拉块 -->
-    <div
-      v-if="isProgress && data.children.length === 0"
-      class="gt-slider-progress-btn"
-      :style="{ left: `${progressValue}%`, opacity: showProgressBtn ? 1 : 0 }"
-      @mousedown.stop="onProgressBtnMouseDown"
-    />
-  </div>
-</template>
 
 <style scoped lang="scss">
 @use 'sass:math';

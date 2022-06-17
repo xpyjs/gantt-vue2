@@ -8,15 +8,15 @@ import { uuid } from '@/utils/common';
 export default defineComponent({
   name: Variables.name.ganttBackgroundRow,
   props: {
-    data: { type: Object as PropType<Row>, required: true }
+    rowData: { type: Object as PropType<Row>, required: true }
   },
 
   setup(props) {
-    const { data } = toRefs(props);
+    const { rowData } = toRefs(props);
 
     const { ganttRowStyle } = useStyle();
 
-    const key = ref(data.value?.uuid ?? uuid(12));
+    const key = ref(rowData.value?.uuid ?? uuid(12));
 
     return {
       key,
@@ -27,7 +27,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div :key="key" class="gt-gantt-row" :style="ganttRowStyle(data.level)" />
+  <div :key="key" class="gt-gantt-row" :style="ganttRowStyle(rowData.level)" />
 </template>
 
 <style scoped lang="scss">

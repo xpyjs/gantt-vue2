@@ -16,7 +16,7 @@
         position: 'relative'
       }"
     >
-      <RowWrap :data="rowData" :name="Variables.name.tableRow" />
+      <RowWrap :row-data="rowData" :name="Variables.name.tableRow" />
     </div>
 
     <!-- 底部占位条，对齐甘特图的滚动条 -->

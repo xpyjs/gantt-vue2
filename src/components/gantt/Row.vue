@@ -11,28 +11,28 @@ import useParam from '@/composables/useParam';
 import { Variables } from '@/constants/vars';
 import { Row } from '@/models/data/row';
 import { uuid } from '@/utils/common';
-import JGanttSlider from '../slider/index.vue';
+import XGanttSlider from '../slider/index.vue';
 
 export default defineComponent({
   name: Variables.name.ganttRow,
 
   components: {
-    JGanttSlider
+    XGanttSlider
   },
 
   props: {
-    data: { type: Object as PropType<Row>, required: true }
+    rowData: { type: Object as PropType<Row>, required: true }
   },
 
   setup(props) {
-    const { data } = toRefs(props);
+    const { rowData } = toRefs(props);
 
-    const key = ref(data.value?.uuid ?? uuid(12));
+    const key = ref(rowData.value?.uuid ?? uuid(12));
     const { GtParam } = useParam();
     const sliderNode = computed(() => GtParam.sliderNode);
 
     const { onClickRow, onDbClickRow, onMouseEnterRow, onMouseLeaveRow } =
-      useEvent(data.value as Row);
+      useEvent(rowData.value as Row);
 
     return {
       key,
@@ -42,25 +42,28 @@ export default defineComponent({
       onMouseEnterRow,
       onMouseLeaveRow
     };
+  },
+
+  render(h) {
+    const { rowData, key, sliderNode } = this as any;
+
+    return h(
+      'div',
+      {
+        class: ['gt-table-row'],
+        key,
+        on: {
+          click: this.onClickRow as any,
+          dblclick: this.onDbClickRow as any,
+          mouseenter: this.onMouseEnterRow as any,
+          mouseleave: this.onMouseLeaveRow as any
+        }
+      },
+      [!!rowData && (sliderNode || h(XGanttSlider))]
+    );
   }
 });
 </script>
-
-<template>
-  <div
-    :key="key"
-    class="gt-gantt-row"
-    @click="onClickRow"
-    @dblclick="onDbClickRow"
-    @mouseenter="onMouseEnterRow"
-    @mouseleave="onMouseLeaveRow"
-  >
-    <template v-if="!!data">
-      <component :is="sliderNode" v-if="sliderNode" :data="data" />
-      <JGanttSlider v-else :data="data" />
-    </template>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .gt-gantt-row {

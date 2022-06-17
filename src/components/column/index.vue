@@ -1,5 +1,11 @@
 <script lang="ts">
-import { toRefs, computed, defineComponent, ref } from '@vue/composition-api';
+import {
+  toRefs,
+  computed,
+  defineComponent,
+  ref,
+  getCurrentInstance
+} from '@vue/composition-api';
 import useParam from '@/composables/useParam';
 import { Variables } from '@/constants/vars';
 import { Row } from '@/models/data/row';
@@ -20,18 +26,19 @@ export default defineComponent({
 
   props: columnProps,
 
-  setup(props, { attrs, slots }) {
-    const { dateFormat, label, emptyData, center, columnStyle, columnClass } =
-      toRefs(props);
+  setup(props, { slots }) {
+    const { dateFormat, label, emptyData, center, columnStyle } = toRefs(props);
 
     // eslint-disable-next-line no-underscore-dangle
-    const nodeKey = attrs.__key as number;
-    const data = attrs.data as Row;
+    // const nodeKey = attrs.__key as number;
+    const nodeKey = getCurrentInstance()?.vnode.key as number;
+    // const rowData = attrs.data as Row;
+    const rowData = getCurrentInstance()?.parent?.props.rowData as Row;
     const { GtParam } = useParam();
-    const { isMerge, scopeData, textData } = useRender(data);
+    const { isMerge, scopeData, textData } = useRender(rowData);
 
     const realWidth = computed(() => {
-      return GtParam.tableHeaders[nodeKey].width;
+      return GtParam.tableHeaders[nodeKey]?.width || 0;
     });
 
     const colWidth = computed(() => {
@@ -44,7 +51,7 @@ export default defineComponent({
       for (let i = (nodeKey as number) + 1; i < GtParam.colNodes.length; i++) {
         const v = GtParam.colNodes[i];
         if (isMerge(v.merge)) {
-          w += GtParam.tableHeaders[i].width;
+          w += GtParam.tableHeaders[i]?.width ?? 0;
         } else {
           break;
         }
@@ -66,37 +73,37 @@ export default defineComponent({
     });
     const showCheckbox = computed(() => GtParam.showCheckbox && nodeKey === 0);
     const showExpand = computed(() => GtParam.showExpand && nodeKey === 0);
-    const canshowExpand = computed(() => data.children.length > 0);
-    const expandMarginLeft = computed(() => data.level * 10);
-    const isExpand = computed(() => data.isExpand);
+    const canshowExpand = computed(() => rowData.children.length > 0);
+    const expandMarginLeft = computed(() => rowData.level * 10);
+    const isExpand = computed(() => rowData.isExpand);
 
     const checkboxRef = ref<HTMLInputElement>();
-    const { onChangeCheckbox } = useEvent(data);
+    const { onChangeCheckbox } = useEvent(rowData);
     // 鼠标左键，单项切换状态
     function onChangeCheckboxState(e: Event) {
-      data.setChecked((e.target as HTMLInputElement).checked);
-      onChangeCheckbox(data.isChecked);
+      rowData.setChecked((e.target as HTMLInputElement).checked);
+      onChangeCheckbox(rowData.isChecked);
     }
     // 鼠标右键，深度切换状态
     function onRightClick() {
       // 选中时，先选中再抛出事件。取消时相反
-      if (!data.isChecked) {
-        data.setChecked(true, true);
+      if (!rowData.isChecked) {
+        rowData.setChecked(true, true);
         onChangeCheckbox(
           true,
-          data.getFlattenChildren().filter(v => v.isChecked)
+          rowData.getFlattenChildren().filter(v => v.isChecked)
         );
       } else {
         onChangeCheckbox(
           false,
-          data.getFlattenChildren().filter(v => v.isChecked)
+          rowData.getFlattenChildren().filter(v => v.isChecked)
         );
-        data.setChecked(false, true);
+        rowData.setChecked(false, true);
       }
     }
 
     function onClickExpand() {
-      data.setExpand(!isExpand.value);
+      rowData.setExpand(!isExpand.value);
     }
 
     // chunk content
@@ -122,6 +129,7 @@ export default defineComponent({
     const chunkNode = computed(() => {
       return slots?.default && slots.default(scopeData(dateFormat?.value))[0];
     });
+
     const chunkText = computed(() => {
       return (
         !isChunkNode.value &&
@@ -130,13 +138,8 @@ export default defineComponent({
     });
 
     return {
-      columnClass,
-      data,
-      nodeKey,
-      realWidth,
-      colWidth,
+      rowData,
       rootStyle,
-      boxSize,
       boxSizeStyle,
       showCheckbox,
       showExpand,
@@ -152,54 +155,103 @@ export default defineComponent({
       chunkNode,
       chunkText
     };
+  },
+
+  render(h) {
+    const {
+      rowData,
+      rootStyle,
+      boxSizeStyle,
+      showCheckbox,
+      showExpand,
+      canshowExpand,
+      expandMarginLeft,
+      isExpand,
+      onChangeCheckboxState,
+      onRightClick,
+      onClickExpand,
+      chunkStyle,
+      isChunkNode,
+      chunkNode,
+      chunkText
+    } = this as any;
+
+    return h(
+      'div',
+      {
+        class: { 'gt-column': true, 'gt-noselect': !this.selectable },
+        style: rootStyle
+      },
+      [
+        showCheckbox &&
+          h('input', {
+            class: { 'gt-column__checkbox': true },
+            style: boxSizeStyle,
+            attrs: {
+              type: 'checkbox',
+              name: 'checkbox',
+              id: 'checkbox',
+              checked: rowData.isChecked
+            },
+            on: {
+              change: onChangeCheckboxState,
+              contextmenu: (e: Event) => {
+                e.preventDefault();
+                onRightClick();
+              },
+              click: (e: Event) => {
+                e.stopPropagation();
+              },
+              dblclick: (e: Event) => {
+                e.stopPropagation();
+              }
+            }
+          }),
+
+        showExpand &&
+          h(
+            'div',
+            {
+              class: { 'gt-column__expand': true, 'gt-hide': !canshowExpand },
+              style: {
+                marginLeft: `${expandMarginLeft}px`,
+                ...boxSizeStyle
+              },
+              on: {
+                click: (e: Event) => {
+                  e.stopPropagation();
+                  onClickExpand();
+                },
+                dblclick: (e: Event) => {
+                  e.stopPropagation();
+                }
+              }
+            },
+            [
+              h('ArrowIcon', {
+                props: {
+                  direction: isExpand.value ? 'down' : 'right'
+                }
+              })
+            ]
+          ),
+
+        // 加载内容
+        h(
+          'div',
+          {
+            class: Object.assign(this.columnClass, {
+              'gt-column__chunk': true
+            }),
+            style: chunkStyle
+          },
+          [isChunkNode ? chunkNode : chunkText]
+        )
+      ]
+    );
   }
 });
 </script>
-
-<template>
-  <div
-    class="gt-column"
-    :class="{ 'gt-noselect': !selectable }"
-    :style="rootStyle"
-  >
-    <input
-      v-if="showCheckbox"
-      id="checkbox"
-      ref="checkboxRef"
-      class="gt-column__checkbox"
-      :checked="data.isChecked"
-      type="checkbox"
-      name="checkbox"
-      :style="boxSizeStyle"
-      @change="onChangeCheckboxState"
-      @click.stop
-      @dblclick.stop
-      @contextmenu.prevent="e => onRightClick(e)"
-    />
-
-    <div
-      v-if="showExpand"
-      class="gt-column__expand"
-      :class="{ 'gt-hide': !canshowExpand }"
-      :style="{
-        ...boxSizeStyle,
-        marginLeft: `${expandMarginLeft}px`
-      }"
-      @click.stop="onClickExpand"
-      @dblclick.stop
-    >
-      <ArrowIcon :direction="isExpand ? 'down' : 'right'" />
-    </div>
-
-    <!-- 加载内容 -->
-    <div class="gt-column__chunk" :class="columnClass" :style="chunkStyle">
-      <component :is="chunkNode" v-if="isChunkNode" />
-      <template v-else>
-        {{ chunkText }}
-      </template>
-    </div>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .gt-column {

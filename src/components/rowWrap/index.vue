@@ -4,7 +4,7 @@
       :is="camelToKebabCased(name)"
       v-for="view in inView"
       :key="view.uuid"
-      :data="view"
+      :row-data="view"
       :style="rowWrapStyle(view.__uindex, view.uuid, isTransparent)"
       class="gt-update-animate-item"
     />
@@ -37,7 +37,7 @@ export default defineComponent({
   },
 
   props: {
-    data: {
+    rowData: {
       type: Array as PropType<Array<Row>>,
       required: true
     },
@@ -49,8 +49,8 @@ export default defineComponent({
   },
 
   setup(props) {
-    const { data } = toRefs(props);
-    const { inView } = useInView(data as Ref<Array<Row>>);
+    const { rowData } = toRefs(props);
+    const { inView } = useInView(rowData as Ref<Array<Row>>);
     const { rowWrapStyle } = useStyle();
 
     const isTransparent = computed(() => {

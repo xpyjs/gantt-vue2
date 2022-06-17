@@ -6,12 +6,15 @@ import useRender from '@/composables/useRender';
 import useStyle from '@/composables/useStyle';
 import { Variables } from '@/constants/vars';
 import { Row } from '@/models/data/row';
+import XGanttColumn from '@/components/column/index.vue';
 
 export default defineComponent({
   name: Variables.name.tableRow,
 
+  components: { XGanttColumn },
+
   props: {
-    data: {
+    rowData: {
       type: Object as () => Row,
       required: true
     }
@@ -21,11 +24,11 @@ export default defineComponent({
     const { tableRowStyle } = useStyle();
 
     const { GtParam } = useParam();
-    const { isMerge } = useRender(props.data);
+    const { isMerge } = useRender(props.rowData);
     const colNodes = GtParam.colNodes.filter(n => !isMerge(n.merge));
 
     const { onClickRow, onDbClickRow, onMouseEnterRow, onMouseLeaveRow } =
-      useEvent(props.data);
+      useEvent(props.rowData);
 
     return {
       tableRowStyle,
@@ -35,29 +38,33 @@ export default defineComponent({
       onMouseEnterRow,
       onMouseLeaveRow
     };
+  },
+
+  render(h) {
+    const { tableRowStyle, rowData, colNodes } = this as any;
+    return h(
+      'div',
+      {
+        class: { 'gt-table-row': true },
+        style: { ...tableRowStyle(rowData.level) },
+        on: {
+          click: this.onClickRow as any,
+          dblclick: this.onDbClickRow as any,
+          mouseenter: this.onMouseEnterRow as any,
+          mouseleave: this.onMouseLeaveRow as any
+        }
+      },
+      rowData
+        ? colNodes.map(
+            (v: any) =>
+              // h(v.node, { attrs: { rowData: this.rowData } })
+              v.node
+          )
+        : null
+    );
   }
 });
 </script>
-
-<template>
-  <div
-    class="gt-table-row"
-    :style="tableRowStyle(data.level)"
-    @click="onClickRow"
-    @dblclick="onDbClickRow"
-    @mouseenter="onMouseEnterRow"
-    @mouseleave="onMouseLeaveRow"
-  >
-    <template v-if="!!data">
-      <component
-        :is="node.node"
-        v-for="node in colNodes"
-        :key="node.key"
-        :data="data"
-      />
-    </template>
-  </div>
-</template>
 
 <style scoped lang="scss">
 .gt-table-row {

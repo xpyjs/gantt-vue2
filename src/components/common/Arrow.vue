@@ -25,13 +25,7 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  onMounted,
-  PropType,
-  ref,
-  watch
-} from '@vue/composition-api';
+import { defineComponent, PropType } from '@vue/composition-api';
 
 type Direction = 'up' | 'down' | 'left' | 'right';
 
@@ -53,44 +47,47 @@ export default defineComponent({
     }
   },
 
-  setup(props) {
-    const up = ref(false);
-    const down = ref(false);
-    const left = ref(false);
-    const right = ref(true);
+  data() {
+    return {
+      up: false,
+      down: false,
+      left: false,
+      right: false
+    };
+  },
 
-    function checkDirection() {
-      up.value = false;
-      down.value = false;
-      left.value = false;
-      right.value = false;
+  watch: {
+    direction() {
+      this.checkDirection();
+    }
+  },
 
-      switch (props.direction) {
+  mounted() {
+    this.checkDirection();
+  },
+
+  methods: {
+    checkDirection() {
+      this.up = false;
+      this.down = false;
+      this.left = false;
+      this.right = false;
+
+      switch (this.direction) {
         case 'up':
-          up.value = true;
+          this.up = true;
           break;
         case 'down':
-          down.value = true;
+          this.down = true;
           break;
         case 'left':
-          left.value = true;
+          this.left = true;
           break;
         default:
-          right.value = true;
+          this.right = true;
           break;
       }
     }
-
-    onMounted(() => {
-      checkDirection();
-    });
-
-    watch(
-      () => props.direction,
-      () => {
-        checkDirection();
-      }
-    );
   }
 });
 </script>

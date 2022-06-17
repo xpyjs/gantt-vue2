@@ -1,5 +1,5 @@
 <template>
-  <Root ref="rootRef" v-bind="$attrs" :slot="slots" />
+  <Root ref="rootRef" v-bind="$attrs" :slots="slots" />
 </template>
 
 <script lang="ts">
