@@ -2,13 +2,13 @@
   <div ref="rootRef" class="gt-root" :style="rootStyle">
     <!-- 悬停操作按钮，外部遮罩一层，用于定位 -->
     <div v-if="showSettingBtn" class="gt-root-btn-mask">
-      <JBtn
+      <XBtn
         icon="more"
         :size="btnSize"
         :style="opBtnStyle"
-        @mouseenter.passive="onOpBtnMouseEnter"
-        @mouseleave.passive="onOpBtnMouseLeave"
-        @click.stop="onOpBtnClick"
+        @mouseenter.native.passive="onOpBtnMouseEnter"
+        @mouseleave.native.passive="onOpBtnMouseLeave"
+        @click.native.stop="onOpBtnClick"
       />
     </div>
 
@@ -26,22 +26,22 @@
       @mousedown="onResizeTableWidth"
     />
 
-    <JTable :row-data="allData" @table-scroll="tableWheelHandle" />
+    <XTable :row-data="allData" @table-scroll="tableWheelHandle" />
 
-    <JGantt :row-data="allData" @gantt-scroll="ganttWheelHandle" />
+    <XGantt :row-data="allData" @gantt-scroll="ganttWheelHandle" />
 
     <!-- 设置抽屉 -->
-    <JDrawer :show="isShowOperationDrawer" />
+    <XDrawer :show="isShowOperationDrawer" />
 
     <!-- 遮罩层 -->
     <div :class="maskClass" @click.stop="onClickMask" />
 
     <!-- toast -->
-    <JToast />
+    <XToast />
 
     <!-- success bar -->
     <!-- <template v-for="row in successBarList">
-      <JSuccessBar :key="row.uuid" :row="row" />
+      <XSuccessBar :key="row.uuid" :row="row" />
     </template> -->
   </div>
 </template>
@@ -51,12 +51,12 @@ import { computed, defineComponent, ref, toRefs } from '@vue/composition-api';
 import { useInitParam } from '@/composables/useParam';
 import { useInitRootRef } from '@/composables/useRootRef';
 import { Variables } from '@/constants/vars';
-import JTable from '@/components/table/index.vue';
-import JGantt from '@/components/gantt/index.vue';
-import JBtn from '@/components/common/Btn.vue';
-import JDrawer from '@/components/common/Drawer.vue';
-import JToast from '@/components/common/Toast.vue';
-// import JSuccessBar from '@/components/common/SuccessBar.vue';
+import XTable from '@/components/table/index.vue';
+import XGantt from '@/components/gantt/index.vue';
+import XBtn from '@/components/common/Btn.vue';
+import XDrawer from '@/components/common/Drawer.vue';
+import XToast from '@/components/common/Toast.vue';
+// import XSuccessBar from '@/components/common/SuccessBar.vue';
 import useWheel from '@/composables/useWheel';
 import useResize, {
   useBtnPosition,
@@ -76,12 +76,12 @@ export default defineComponent({
   name: 'XGanttRoot',
 
   components: {
-    JTable,
-    JGantt,
-    JBtn,
-    JDrawer,
-    JToast
-    // JSuccessBar
+    XTable,
+    XGantt,
+    XBtn,
+    XDrawer,
+    XToast
+    // XSuccessBar
   },
 
   props: rootProps,
