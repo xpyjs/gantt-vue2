@@ -65,7 +65,6 @@ import useResize, {
 } from '@/composables/useResize';
 import useMask from '@/composables/useMask';
 import { useDark } from '@/composables/useStyle';
-import useInitEvent from '@/composables/event/useInitEvent';
 import useExportEvent from '@/composables/event/useExportEvent';
 import { useInitData } from '@/composables/data/useData';
 // eslint-disable-next-line import/named
@@ -87,7 +86,7 @@ export default defineComponent({
 
   props: rootProps,
 
-  setup(props, { emit }) {
+  setup(props) {
     const {
       data,
       border,
@@ -100,8 +99,6 @@ export default defineComponent({
     } = toRefs(props);
     // 绑定根元素
     const { rootRef } = useInitRootRef();
-    // 初始化事件
-    useInitEvent(emit);
     // 初始化参数
     useInitParam(props, props.slots);
     // 处理数据
