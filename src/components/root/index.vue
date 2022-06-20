@@ -40,9 +40,9 @@
     <JToast />
 
     <!-- success bar -->
-    <template v-for="row in successBarList">
+    <!-- <template v-for="row in successBarList">
       <JSuccessBar :key="row.uuid" :row="row" />
-    </template>
+    </template> -->
   </div>
 </template>
 
@@ -56,7 +56,7 @@ import JGantt from '@/components/gantt/index.vue';
 import JBtn from '@/components/common/Btn.vue';
 import JDrawer from '@/components/common/Drawer.vue';
 import JToast from '@/components/common/Toast.vue';
-import JSuccessBar from '@/components/common/SuccessBar.vue';
+// import JSuccessBar from '@/components/common/SuccessBar.vue';
 import useWheel from '@/composables/useWheel';
 import useResize, {
   useBtnPosition,
@@ -81,8 +81,8 @@ export default defineComponent({
     JGantt,
     JBtn,
     JDrawer,
-    JToast,
-    JSuccessBar
+    JToast
+    // JSuccessBar
   },
 
   props: rootProps,
