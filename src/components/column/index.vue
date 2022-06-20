@@ -240,9 +240,7 @@ export default defineComponent({
         h(
           'div',
           {
-            class: Object.assign(this.columnClass, {
-              'gt-column__chunk': true
-            }),
+            class: ['gt-column__chunk', this.columnClass],
             style: chunkStyle
           },
           [isChunkNode ? chunkNode : chunkText]
