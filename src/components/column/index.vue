@@ -127,7 +127,7 @@ export default defineComponent({
 
     const isChunkNode = computed(() => !!slots?.default);
     const chunkNode = computed(() => {
-      return slots?.default && slots.default(scopeData(dateFormat?.value))[0];
+      return slots?.default && slots.default(scopeData(dateFormat?.value));
     });
 
     const chunkText = computed(() => {
@@ -243,7 +243,7 @@ export default defineComponent({
             class: ['gt-column__chunk', this.columnClass],
             style: chunkStyle
           },
-          [isChunkNode ? chunkNode : chunkText]
+          isChunkNode ? chunkNode : chunkText
         )
       ]
     );
