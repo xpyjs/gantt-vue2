@@ -22,7 +22,7 @@ import {
 import { isBoolean, isFunction } from '@/utils/is';
 import useRootEmit from '@/composables/event/useRootEmit';
 import useData from '@/composables/data/useData';
-import useShowDate from '@/composables/useShowDate';
+// import useShowDate from '@/composables/useShowDate';
 import useToast from '@/composables/useToast';
 import useSuccessBar from '@/composables/useSuccessBar';
 import sliderProps from './props';
@@ -281,13 +281,13 @@ export default defineComponent({
       };
     });
 
-    const { addShowDate, clearShowDateList } = useShowDate();
+    // const { addShowDate, clearShowDateList } = useShowDate();
 
     function onMouseEnter() {
       showProgressBtn.value = true;
 
-      addShowDate(data.start);
-      addShowDate(data.end);
+      // addShowDate(data.start);
+      // addShowDate(data.end);
 
       if (!canMove.value) return;
       showCtrlChunk.value = true;
@@ -296,7 +296,7 @@ export default defineComponent({
     function onMouseLeave() {
       showProgressBtn.value = false;
 
-      clearShowDateList();
+      // clearShowDateList();
 
       if (!canMove.value) return;
       showCtrlChunk.value = false;
