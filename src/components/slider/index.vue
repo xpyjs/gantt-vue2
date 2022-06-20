@@ -655,9 +655,9 @@ $default-slider-border-radius: 3px;
     left: 0;
     padding: 0;
 
-    & > * {
-      height: 100%;
-    }
+    // & > * {
+    //   height: 100%;
+    // }
   }
 
   .gt-slider-progress-btn {
