@@ -34,7 +34,7 @@
 
         <div style="display: inline-block">
           <div class="gt-text-secondary-title">修改行高</div>
-          <j-slider
+          <x-slider
             v-model="rowHeight"
             style="margin: 5px 20px 10px 0px"
             :min="minRowHeight"
@@ -86,12 +86,12 @@ import { Variables } from '@/constants/vars';
 import { parseNumber } from '@/utils/common';
 // eslint-disable-next-line import/named
 import { GanttColumnSize, HeaderDateUnit } from '@/typings/ParamOptions';
-import JSlider from './Slider.vue';
+import XSlider from './Slider.vue';
 
 export default defineComponent({
   name: 'GanttDrawer',
 
-  components: { JSlider },
+  components: { XSlider },
 
   props: {
     show: {

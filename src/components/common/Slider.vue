@@ -1,6 +1,6 @@
 <template>
   <div class="gt-slider-bar">
-    <input v-model="value" type="range" :min="min" :max="max" />
+    <input v-model="val" type="range" :min="min" :max="max" />
     <div class="show-val gt-shadow">
       {{ value }}
     </div>
@@ -14,7 +14,7 @@ export default defineComponent({
   name: 'GanttSlider',
 
   props: {
-    modelValue: { type: Number, default: 0 },
+    value: { type: Number, default: 0 },
 
     min: {
       type: Number,
@@ -28,16 +28,16 @@ export default defineComponent({
   },
 
   setup(props, ctx) {
-    const { modelValue } = toRefs(props);
+    const { value } = toRefs(props);
 
-    const value = computed({
-      get: () => modelValue.value,
+    const val = computed({
+      get: () => value.value,
       set: v => {
-        ctx.emit('update:modelValue', v);
+        ctx.emit('input', v);
       }
     });
 
-    return { value };
+    return { val };
   }
 });
 </script>
