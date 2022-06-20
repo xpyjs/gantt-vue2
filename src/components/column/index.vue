@@ -230,7 +230,7 @@ export default defineComponent({
             [
               h('ArrowIcon', {
                 props: {
-                  direction: isExpand.value ? 'down' : 'right'
+                  direction: isExpand ? 'down' : 'right'
                 }
               })
             ]
