@@ -447,7 +447,7 @@ export default defineComponent({
       leftChunkSlot,
       sliderSlot,
       progressValue,
-      showProgressBtn,
+      // showProgressBtn,
 
       isProgress,
       isCustomLeftChunkScoped,
@@ -457,7 +457,7 @@ export default defineComponent({
 
   render(h) {
     const {
-      data,
+      // data,
       sliderStyle,
       sliderText,
       onMouseEnter,
@@ -465,7 +465,7 @@ export default defineComponent({
       onMouseDown,
       onLeftChunkMouseDown,
       onRightChunkMouseDown,
-      onProgressBtnMouseDown,
+      // onProgressBtnMouseDown,
       rightChunkStyle,
       leftChunkStyle,
       progressStyle,
@@ -478,7 +478,7 @@ export default defineComponent({
       leftChunkSlot,
       sliderSlot,
       progressValue,
-      showProgressBtn,
+      // showProgressBtn,
 
       isProgress,
       isCustomLeftChunkScoped,
@@ -573,24 +573,26 @@ export default defineComponent({
             }
           },
           [isCustomRightChunkScoped ? rightChunkSlot : null]
-        ),
+        )
 
+        // 进度为 0 时拖拽有问题，故先放弃该功能。如有需要，可以直接编辑数据
         // 进度条拉块
-        isProgress &&
-          data.children.length === 0 &&
-          h('div', {
-            class: 'gt-slider-progress-btn',
-            style: {
-              left: `${progressValue}%`,
-              opacity: showProgressBtn ? 1 : 0
-            },
-            on: {
-              mousedown: (e: MouseEvent) => {
-                e.stopPropagation();
-                onProgressBtnMouseDown(e);
-              }
-            }
-          })
+        // isProgress &&
+        //   !sliderSlot &&
+        //   data.children.length === 0 &&
+        //   h('div', {
+        //     class: 'gt-slider-progress-btn',
+        //     style: {
+        //       left: `${progressValue}%`,
+        //       opacity: showProgressBtn ? 1 : 0
+        //     },
+        //     on: {
+        //       mousedown: (e: MouseEvent) => {
+        //         e.stopPropagation();
+        //         onProgressBtnMouseDown(e);
+        //       }
+        //     }
+        //   })
       ]
     );
   }
