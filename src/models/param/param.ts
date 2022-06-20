@@ -333,7 +333,9 @@ export class ParamData {
           // eslint-disable-next-line no-param-reassign
           v.key = colVNodeKey;
 
-          Object.assign(v.componentOptions?.propsData, { __key: colVNodeKey });
+          Object.assign(v.componentOptions?.propsData ?? {}, {
+            __key: colVNodeKey
+          });
 
           const label: string = (v.componentOptions?.propsData as any)?.label;
           const width = parseNumber(
