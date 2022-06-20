@@ -114,16 +114,17 @@ export default defineComponent({
     // });
 
     // 判断用户是否提供了 content 插槽
-    const customContentScoped = computed(() => {
+    const isCustomContentScoped = computed(() => {
       let slot;
       // eslint-disable-next-line prefer-destructuring
       if (slots?.content)
         slot = slots.content(scopeData(dateFormat?.value))?.[0];
 
       // return slot && isSymbol(slot.type) ? undefined : slot;
-      return slot && Object.prototype.hasOwnProperty.call(slot, 'content')
-        ? slot
-        : undefined;
+      // return slot && Object.prototype.hasOwnProperty.call(slot, 'content')
+      //   ? slot
+      //   : undefined;
+      return !!slot;
     });
 
     // 判断用户是否提供了左侧插槽
@@ -140,12 +141,13 @@ export default defineComponent({
         slot = slots.content(scopeData(dateFormat?.value))?.[0];
       else if (slots?.default)
         // eslint-disable-next-line prefer-destructuring
-        slot = slots.default(scopeData(dateFormat?.value))[0];
+        slot = slots.default(scopeData(dateFormat?.value))?.[0];
 
       // return slot && isSymbol(slot.type) ? undefined : slot;
-      return slot && Object.prototype.hasOwnProperty.call(slot, 'content')
-        ? slot
-        : undefined;
+      // return slot && Object.prototype.hasOwnProperty.call(slot, 'content')
+      //   ? slot
+      //   : undefined;
+      return slot;
     });
 
     // 左侧移动块内容
@@ -160,8 +162,8 @@ export default defineComponent({
 
     const contentClass = computed(() => {
       return {
-        'gt-slider-content': !customContentScoped.value,
-        'gt-custom-slider-content': customContentScoped.value,
+        'gt-slider-content': !isCustomContentScoped.value,
+        'gt-custom-slider-content': isCustomContentScoped.value,
         'gt-noselect': true,
         'gt-text-nowrap': true
       };
@@ -183,7 +185,7 @@ export default defineComponent({
     });
 
     const isProgress = computed(() => {
-      return !customContentScoped.value && progress.value;
+      return !isCustomContentScoped.value && progress.value;
     });
 
     const contentStyle = computed(() => {
@@ -191,7 +193,9 @@ export default defineComponent({
         justifyContent: realAlignment.value,
         borderRadius: '3px',
         padding: `0px ${
-          customContentScoped.value || realAlignment.value === 'center' ? 0 : 20
+          isCustomContentScoped.value || realAlignment.value === 'center'
+            ? 0
+            : 20
         }px`
       };
     });
@@ -209,7 +213,9 @@ export default defineComponent({
       return {
         filter: isProgress.value ? 'sepia(1)' : 'none',
         borderRadius: '3px',
-        backgroundColor: !customContentScoped.value ? backgroundColor.value : ''
+        backgroundColor: !isCustomContentScoped.value
+          ? backgroundColor.value
+          : ''
       };
     });
 
@@ -268,7 +274,7 @@ export default defineComponent({
         width: `${sliderWidth.value}px`,
         left: `${sliderLeft.value}px`,
         backgroundColor:
-          !customContentScoped.value && !progress.value
+          !isCustomContentScoped.value && !progress.value
             ? backgroundColor.value
             : ''
         // cursor: canMove.value ? "ew-resize" : "not-allowed"
@@ -496,11 +502,13 @@ export default defineComponent({
       [
         // 进度条
         isProgress &&
+          !sliderSlot &&
           h('div', {
             class: contentClass,
             style: progressBackStyle
           }),
         isProgress &&
+          !sliderSlot &&
           h(
             'div',
             {
