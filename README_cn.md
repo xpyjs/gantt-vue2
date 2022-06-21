@@ -8,11 +8,19 @@
 
 基于 vue2 的高性能甘特组件。
 
+#### `vue3` 版本请移步 [这里](https://github.com/xpyjs/gantt)
+
 ## 十分重要
 
-这个库是 `jz-gantt` 的 vue2 版本的继承库。
+这个库是 `jz-gantt` 的 vue2 版本的继承库。如果您之前已经使用了 `jz-gantt`，则需要仔细阅读如下内容。
 
-### 如何更新
+**说明：**
+
+> - `jz-gantt` vue2 版本（v0.0.17）已经被弃用。
+> - 本项目完全重写。基于 `vue3` 代码，支持内容到 `1.3.1`，但不再更新内容，只做基本维护。如需更新内容，请使用 vue3 版本，或者自行更新。
+> - 另外，如果您 fork 并提交了代码，我检测后会合并到主分支，并更新版本内容。
+
+### 如何迁移
 
 1. 包名不同， `@xpyjs/gantt-vue2` 替换了 `jz-gantt`。
 2. 所有以 `j-` 或 `J` 的前缀全都更新为 `x-` 或 `X`。
@@ -37,6 +45,9 @@
 
 ```bash
 npm install @xpyjs/gantt-vue2 --save
+
+// or
+yarn add @xpyjs/gantt-vue2
 ```
 
 ### 使用
@@ -44,7 +55,7 @@ npm install @xpyjs/gantt-vue2 --save
 ```js
 import Vue from "vue";
 import XGantt from "@xpyjs/gantt-vue2";
-import "@xpyjs/gantt-vue2/lib/gantt-vue2.css";
+import '@xpyjs/gantt-vue2/lib/index.css';
 
 Vue.use(XGantt);
 ```
@@ -103,7 +114,7 @@ const dataList = [
 
 ### 使用列组件
 
-内置了一个列组件，名为 `XGanttColumn`。其中， `label` 属性是必须的。
+内置了一个列组件，名为 `XGanttColumn`。其中，`label` 属性是必须的，它的值应当对应 `data` 中的字段名（支持深度查询），这会告诉组件渲染那一列内容。
 
 ```html
 <x-gantt
@@ -129,6 +140,11 @@ const dataList = [
     <x-gantt-slider />  <!-- will be rendered -->
 </x-gantt>
 ```
+
+## 与 vue3 版本的区别
+
+- 悬停 slider 时，日期不会高亮
+- 不允许拖拽 slider 上的进度值
 
 ## License
 

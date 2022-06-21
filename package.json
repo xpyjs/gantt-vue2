@@ -1,6 +1,6 @@
 {
-    "name": "@xpyjs/gantt-vue2",
-    "version": "1.0.0",
+    "name": "@xpyjs/gantt-vue2-test",
+    "version": "1.0.2",
     "description": "A high-performance vue2 gantt component.",
     "author": "jeremyjone",
     "license": "MIT",
@@ -26,17 +26,18 @@
     "files": [
         "lib",
         "src",
-        "types",
+        "typings",
         "public",
         "package.json",
         "README.md"
     ],
-    "main": "lib/gantt-vue2.umd.min.js",
+    "main": "lib/index.umd.min.js",
     "typings": "typings/index.d.ts",
     "scripts": {
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
-        "lint": "vue-cli-service lint"
+        "lint": "vue-cli-service lint",
+        "lib": "vue-cli-service build --config ./webpack.config.js --target lib --name index --dest lib src/index.ts"
     },
     "dependencies": {
         "@vue/composition-api": "1.3.0",

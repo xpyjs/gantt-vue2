@@ -5,5 +5,7 @@ dist
 # don't lint nyc coverage output
 coverage
 
+src/App.vue
+
 .eslintrc.js
 *.config.js

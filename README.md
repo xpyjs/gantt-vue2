@@ -8,11 +8,19 @@
 
 A high-performance vue2 gantt component.
 
+#### `vue3` version is [here](https://github.com/xpyjs/gantt)
+
 ## Important
 
-This repo is previous `jz-gantt`. Only vue2 version.
+This repo is previous `jz-gantt`. Only vue2 version. If you have used `jz-gantt` before, you should read the following carefully.
 
-### How to update
+**Specification:**
+
+> - 'jz-gantt' vue2 version (v0.0.17) is deprecated.
+> - This project is completely rewritten. Based on the 'vue3' code, support content to '1.3.1', but no updates, just basic maintenance. If you need to update the content, please use the `vue3` version, or update yourself.
+> - Also, if you fork and PR, I will check and merge it into the main branch and update the version content.
+
+### How to migrate
 
 1. package name changed. `@xpyjs/gantt-vue2` replaced `jz-gantt`.
 2. All `j-` or `J` prefix updpate to `x-` or `X`.
@@ -37,6 +45,9 @@ Beyond that, no other action is required.
 
 ```bash
 npm install @xpyjs/gantt-vue2 --save
+
+// or
+yarn add @xpyjs/gantt-vue2
 ```
 
 ### use
@@ -44,7 +55,7 @@ npm install @xpyjs/gantt-vue2 --save
 ```js
 import Vue from "vue";
 import XGantt from "@xpyjs/gantt-vue2";
-import "@xpyjs/gantt-vue2/lib/gantt-vue2.css";
+import '@xpyjs/gantt-vue2/lib/index.css';
 
 Vue.use(XGantt);
 ```
@@ -103,7 +114,7 @@ const dataList = [
 
 ### Use table column
 
-We provide a slot named `XGanttColumn`. `Label` is required, and it should match data key.
+We provide a slot named `XGanttColumn`. `label` is required, and it should match data key. `label`'s value should correspond to the name of the field in 'data' (deep query support), which tells the component to render the column.
 
 ```html
 <x-gantt
@@ -129,6 +140,11 @@ Only one slider whill be rendered. If you insert more than one slider, only last
     <x-gantt-slider />  <!-- will be rendered -->
 </x-gantt>
 ```
+
+## Differences with vue3 version
+
+- Date is not highlighted when hovering `slider`
+- Dragging progress value on `slider` is not allowed
 
 ## License
 
