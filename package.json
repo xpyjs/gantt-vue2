@@ -1,6 +1,6 @@
 {
-    "name": "@xpyjs/gantt-vue2-test",
-    "version": "1.0.2",
+    "name": "@xpyjs/gantt-vue2",
+    "version": "1.0.1",
     "description": "A high-performance vue2 gantt component.",
     "author": "jeremyjone",
     "license": "MIT",
@@ -27,7 +27,6 @@
         "lib",
         "src",
         "typings",
-        "public",
         "package.json",
         "README.md"
     ],
