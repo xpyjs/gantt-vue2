@@ -12,7 +12,12 @@ module.exports = defineConfig({
   outputDir: 'lib',
   filenameHashing: false,
   assetsDir: 'static',
-  productionSourceMap: false
+  productionSourceMap: false,
+  configureWebpack: {
+    output: {
+      libraryExport: 'default'
+    }
+  }
   // chainWebpack: config => {
   //   // 移除 prefetch 插件
   //   config.plugins.delete('prefetch-index');

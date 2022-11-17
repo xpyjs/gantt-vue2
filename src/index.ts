@@ -23,7 +23,10 @@ const install = (app: any) => {
 };
 
 export default {
-  install
+  install,
+  XGantt,
+  XGanttColumn,
+  XGanttSlider
 };
 
-export { XGantt, XGanttColumn, XGanttSlider };
+// export { XGantt, XGanttColumn, XGanttSlider };
