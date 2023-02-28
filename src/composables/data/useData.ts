@@ -1,4 +1,4 @@
-import { ComputedRef, Ref, computed, watch } from '@vue/composition-api';
+import { ComputedRef, Ref, computed, watch } from 'vue';
 import { Row } from '@/models/data/row';
 import { useStore } from '@/store';
 // eslint-disable-next-line import/no-cycle

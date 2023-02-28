@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, toRefs } from '@vue/composition-api';
+import { computed, defineComponent, ref, toRefs, inject } from 'vue';
 import { useInitParam } from '@/composables/useParam';
 import { useInitRootRef } from '@/composables/useRootRef';
 import { Variables } from '@/constants/vars';
@@ -70,6 +70,7 @@ import { useInitData } from '@/composables/data/useData';
 // eslint-disable-next-line import/named
 import { CustomCssProperties } from '@/typings/private/CSSProperties';
 import useSuccessBar from '@/composables/useSuccessBar';
+import useInitEvent from '@/composables/event/useInitEvent';
 import rootProps from './rootProps';
 
 export default defineComponent({
@@ -97,6 +98,11 @@ export default defineComponent({
       borderColor,
       primaryColor
     } = toRefs(props);
+
+    // 初始化事件
+    const emit = inject('rootEmit');
+    useInitEvent(emit);
+
     // 绑定根元素
     const { rootRef } = useInitRootRef();
     // 初始化参数

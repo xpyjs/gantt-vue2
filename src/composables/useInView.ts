@@ -1,4 +1,4 @@
-import { computed, Ref } from '@vue/composition-api';
+import { computed, Ref } from 'vue';
 import { Row } from '@/models/data/row';
 import useResize from './useResize';
 import useWheel from './useWheel';

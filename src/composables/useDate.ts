@@ -1,7 +1,7 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable @typescript-eslint/naming-convention */
-import { computed } from '@vue/composition-api';
+import { computed } from 'vue';
 import { Variables } from '@/constants/vars';
 import { parseNumber } from '@/utils/common';
 import {

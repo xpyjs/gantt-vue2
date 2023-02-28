@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from '@vue/composition-api';
+import { defineComponent, PropType } from 'vue';
 import { Row } from '@/models/data/row';
 import useResize from '@/composables/useResize';
 import RowWrap from '@/components/rowWrap/index.vue';

@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { PropType, defineComponent } from '@vue/composition-api';
+import { PropType, defineComponent } from 'vue';
 import useResize from '@/composables/useResize';
 import { Row } from '@/models/data/row';
 import useSuccessBar from '@/composables/useSuccessBar';

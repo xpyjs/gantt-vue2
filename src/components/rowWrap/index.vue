@@ -12,13 +12,7 @@
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  Ref,
-  toRefs,
-  PropType
-} from '@vue/composition-api';
+import { computed, defineComponent, Ref, toRefs, PropType } from 'vue';
 import useInView from '@/composables/useInView';
 import { Row } from '@/models/data/row';
 import { camelToKebabCased } from '@/utils/common';

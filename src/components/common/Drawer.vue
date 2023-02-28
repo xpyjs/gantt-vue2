@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, toRefs, computed } from '@vue/composition-api';
+import { defineComponent, toRefs, computed } from 'vue';
 import useParam from '@/composables/useParam';
 import { Variables } from '@/constants/vars';
 import { parseNumber } from '@/utils/common';

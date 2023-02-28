@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue';
 import useEvent from '@/composables/event/useEvent';
 import useParam from '@/composables/useParam';
 import useRender from '@/composables/useRender';
@@ -41,17 +41,26 @@ export default defineComponent({
   },
 
   render(h) {
-    const { tableRowStyle, rowData, colNodes } = this as any;
+    const {
+      tableRowStyle,
+      rowData,
+      colNodes,
+      onClickRow,
+      onDbClickRow,
+      onMouseEnterRow,
+      onMouseLeaveRow
+    } = this as any;
+
     return h(
       'div',
       {
         class: { 'gt-table-row': true },
         style: { ...tableRowStyle(rowData.level) },
         on: {
-          click: this.onClickRow as any,
-          dblclick: this.onDbClickRow as any,
-          mouseenter: this.onMouseEnterRow as any,
-          mouseleave: this.onMouseLeaveRow as any
+          click: onClickRow as any,
+          dblclick: onDbClickRow as any,
+          mouseenter: onMouseEnterRow as any,
+          mouseleave: onMouseLeaveRow as any
         }
       },
       rowData

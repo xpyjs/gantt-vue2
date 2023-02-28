@@ -5,10 +5,10 @@ import {
   defineComponent,
   ref,
   getCurrentInstance
-} from '@vue/composition-api';
-import useParam from '@/composables/useParam';
+} from 'vue';
 import { Variables } from '@/constants/vars';
 import { Row } from '@/models/data/row';
+import useParam from '@/composables/useParam';
 import useResize from '@/composables/useResize';
 import useRender from '@/composables/useRender';
 // eslint-disable-next-line import/named
@@ -28,12 +28,11 @@ export default defineComponent({
 
   setup(props, { slots }) {
     const { dateFormat, label, emptyData, center, columnStyle } = toRefs(props);
-
     // eslint-disable-next-line no-underscore-dangle
     // const nodeKey = attrs.__key as number;
-    const nodeKey = getCurrentInstance()?.vnode.key as number;
+    const nodeKey = getCurrentInstance()?.proxy?.$vnode.key as number;
     // const rowData = attrs.data as Row;
-    const rowData = getCurrentInstance()?.parent?.props.rowData as Row;
+    const rowData = getCurrentInstance()?.proxy?.$parent?.$props.rowData as Row;
     const { GtParam } = useParam();
     const { isMerge, scopeData, textData } = useRender(rowData);
 
@@ -173,13 +172,15 @@ export default defineComponent({
       chunkStyle,
       isChunkNode,
       chunkNode,
-      chunkText
+      chunkText,
+      selectable,
+      columnClass
     } = this as any;
 
     return h(
       'div',
       {
-        class: { 'gt-column': true, 'gt-noselect': !this.selectable },
+        class: { 'gt-column': true, 'gt-noselect': !selectable },
         style: rootStyle
       },
       [
@@ -240,7 +241,7 @@ export default defineComponent({
         h(
           'div',
           {
-            class: ['gt-column__chunk', this.columnClass],
+            class: ['gt-column__chunk', columnClass],
             style: chunkStyle
           },
           isChunkNode ? chunkNode : chunkText

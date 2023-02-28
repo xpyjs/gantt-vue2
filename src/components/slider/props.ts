@@ -1,4 +1,4 @@
-import { PropType } from '@vue/composition-api';
+import { PropType } from 'vue';
 import { Variables } from '@/constants/vars';
 import { SliderAlignment } from '@/typings/ParamOptions';
 

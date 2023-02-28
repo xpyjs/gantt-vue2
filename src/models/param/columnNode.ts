@@ -1,6 +1,7 @@
 import { VNode } from 'vue';
 import { ColumnNodeDataOptions } from '@/typings/ParamOptions';
-import { ScopedSlot } from 'vue/types/vnode';
+
+type ScopedSlot = /* unresolved */ any;
 
 export class ColumnNode {
   /**

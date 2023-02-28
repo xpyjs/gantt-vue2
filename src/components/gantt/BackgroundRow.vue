@@ -1,5 +1,5 @@
 <script lang="ts">
-import { defineComponent, ref, toRefs, PropType } from '@vue/composition-api';
+import { defineComponent, ref, toRefs, PropType } from 'vue';
 import useStyle from '@/composables/useStyle';
 import { Variables } from '@/constants/vars';
 import { Row } from '@/models/data/row';

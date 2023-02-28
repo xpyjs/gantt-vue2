@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue';
 import { Row } from '@/models/data/row';
 import useResize from '@/composables/useResize';
 import RowWrap from '@/components/rowWrap/index.vue';

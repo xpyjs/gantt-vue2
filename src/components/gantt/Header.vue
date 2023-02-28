@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import { useToday } from '@/composables/useDate';
 import useParam from '@/composables/useParam';
 import useStyle from '@/composables/useStyle';

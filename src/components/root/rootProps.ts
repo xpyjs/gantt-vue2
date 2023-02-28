@@ -1,4 +1,4 @@
-import { PropType } from '@vue/composition-api';
+import { PropType } from 'vue';
 import { Errors } from '@/constants/errors';
 import { Variables } from '@/constants/vars';
 import {

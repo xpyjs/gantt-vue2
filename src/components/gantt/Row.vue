@@ -1,11 +1,5 @@
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  ref,
-  toRefs,
-  PropType
-} from '@vue/composition-api';
+import { computed, defineComponent, ref, toRefs, PropType } from 'vue';
 import useEvent from '@/composables/event/useEvent';
 import useParam from '@/composables/useParam';
 import { Variables } from '@/constants/vars';
@@ -45,7 +39,15 @@ export default defineComponent({
   },
 
   render(h) {
-    const { rowData, key, sliderNode } = this as any;
+    const {
+      rowData,
+      key,
+      sliderNode,
+      onClickRow,
+      onDbClickRow,
+      onMouseEnterRow,
+      onMouseLeaveRow
+    } = this as any;
 
     return h(
       'div',
@@ -53,10 +55,10 @@ export default defineComponent({
         class: ['gt-table-row'],
         key,
         on: {
-          click: this.onClickRow as any,
-          dblclick: this.onDbClickRow as any,
-          mouseenter: this.onMouseEnterRow as any,
-          mouseleave: this.onMouseLeaveRow as any
+          click: onClickRow as any,
+          dblclick: onDbClickRow as any,
+          mouseenter: onMouseEnterRow as any,
+          mouseleave: onMouseLeaveRow as any
         }
       },
       [!!rowData && (sliderNode || h(XGanttSlider))]

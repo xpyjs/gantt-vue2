@@ -5,7 +5,7 @@ import {
   onUnmounted,
   readonly,
   ref
-} from '@vue/composition-api';
+} from 'vue';
 import { Variables } from '@/constants/vars';
 import { TableHeader } from '@/models/param/header';
 import { isNumber } from '@/utils/is';

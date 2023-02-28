@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent } from 'vue';
 import useToast from '@/composables/useToast';
 
 export default defineComponent({

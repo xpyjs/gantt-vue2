@@ -7,7 +7,7 @@ import {
   ref,
   toRaw,
   toRefs
-} from '@vue/composition-api';
+} from 'vue';
 import useParam, { useSetGanttHeader } from '@/composables/useParam';
 import useRender from '@/composables/useRender';
 import { Variables } from '@/constants/vars';
@@ -34,7 +34,7 @@ export default defineComponent({
 
   setup(props, { slots }) {
     // const rowData = attrs.data as Row;
-    const data = getCurrentInstance()?.parent?.props.rowData as Row;
+    const data = getCurrentInstance()?.proxy?.$parent?.$props.rowData as Row;
 
     const {
       alignment,
@@ -458,6 +458,7 @@ export default defineComponent({
   render(h) {
     const {
       // data,
+      flat,
       sliderStyle,
       sliderText,
       onMouseEnter,
@@ -488,7 +489,7 @@ export default defineComponent({
     return h(
       'div',
       {
-        class: ['gt-slider', { 'gt-shadow': !this.flat }],
+        class: ['gt-slider', { 'gt-shadow': !flat }],
         style: sliderStyle,
         on: {
           mouseenter: onMouseEnter,

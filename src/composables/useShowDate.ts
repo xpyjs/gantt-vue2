@@ -1,4 +1,4 @@
-import { readonly } from '@vue/composition-api';
+import { readonly } from 'vue';
 import { useStore } from '@/store';
 
 export default () => {

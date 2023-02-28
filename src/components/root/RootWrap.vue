@@ -3,8 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api';
-import useInitEvent from '@/composables/event/useInitEvent';
+import { defineComponent, provide, ref } from 'vue';
 import { initStore } from '@/store';
 import Root from './index.vue';
 
@@ -18,9 +17,7 @@ export default defineComponent({
   setup(_, ctx) {
     // 初始全局数据
     initStore();
-
-    // 初始化事件
-    useInitEvent(ctx.emit);
+    provide('rootEmit', ctx.emit);
 
     const rootRef = ref<any>();
     const setSelected = (args: any) => {

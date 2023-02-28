@@ -1,4 +1,4 @@
-import { onMounted, onUpdated, readonly } from '@vue/composition-api';
+import { onMounted, onUpdated, readonly } from 'vue';
 import { useStore } from '@/store';
 import useGanttRef from './useGanttRef';
 import useTableRef from './useTableRef';

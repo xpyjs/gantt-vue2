@@ -1,5 +1,5 @@
 <script lang="ts">
-import { computed, defineComponent } from '@vue/composition-api';
+import { computed, defineComponent } from 'vue';
 import useParam from '@/composables/useParam';
 import { useResizeTableColumn } from '@/composables/useResize';
 import useStyle from '@/composables/useStyle';

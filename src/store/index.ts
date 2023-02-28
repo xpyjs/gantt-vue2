@@ -2,10 +2,10 @@
  * @Author: JeremyJone
  * @Date: 2021-12-24 16:36:33
  * @LastEditors: JeremyJone
- * @LastEditTime: 2022-11-17 21:07:57
+ * @LastEditTime: 2023-02-28 13:29:49
  * @Description: 头部注释
  */
-import { ref, reactive, provide, inject, Ref } from '@vue/composition-api';
+import { ref, reactive, Ref, provide, inject } from 'vue';
 import { GanttData } from '@/models/data/data';
 import { ParamData } from '@/models/param/param';
 import { Variables } from '@/constants/vars';
@@ -33,10 +33,10 @@ export const initStore = () => {
   const isShowMask = ref(false);
   provide(Variables.provider.gtIsShowMask, isShowMask);
 
-  const showDateList = reactive<Date[]>([]);
+  const showDateList = ref<Date[]>([]);
   provide(Variables.provider.gtShowDateList, showDateList);
 
-  const successBarList: Row[] = reactive([]);
+  const successBarList = ref<Row[]>([]);
   provide(Variables.provider.gtSuccessBarList, successBarList);
 
   const initGanttWidth = ref(0);

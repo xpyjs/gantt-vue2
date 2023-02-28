@@ -1,4 +1,4 @@
-import { computed } from '@vue/composition-api';
+import { computed } from 'vue';
 import { Variables } from '@/constants/vars';
 import { ColorSelectStr } from '@/typings/ParamOptions';
 import { changeAlpha } from '@/utils/colors';

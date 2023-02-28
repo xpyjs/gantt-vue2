@@ -1,4 +1,4 @@
-import { toRefs, watch, computed } from '@vue/composition-api';
+import { toRefs, watch, computed } from 'vue';
 import { Variables } from '@/constants/vars';
 import { parseNumber } from '@/utils/common';
 import { getDateInterval, getDateOffset, getMillisecond } from '@/utils/date';
