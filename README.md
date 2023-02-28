@@ -14,7 +14,9 @@ A high-performance vue2 gantt component.
 
 ********************************
 
-`vue2.6.x` and `vue2.7.x` are incompatible. This repo use `vue2.6.14`, do not use `vue2.7.x`.
+`vue2.6.x` and `vue2.7.x` are incompatible.
+
+- #### If you use `vue2.6.14`
 
 Due to the npm upgrade mechanism, please change the dependent version to fixed:
 
@@ -23,7 +25,13 @@ Due to the npm upgrade mechanism, please change the dependent version to fixed:
 "vue-template-compiler": "2.6.14"
 ```
 
+And then, install `@xpyjs/gantt-vue2@1` version 1.x for this.
+
 The above can solve the initialization error problem, see details [ISSUE](https://github.com/xpyjs/gantt-vue2/issues/5)
+
+- #### If you use `vue2.7.x`
+
+Please install `@xpyjs/gantt-vue2@2` version 2.x for this. Default install will be v2.
 
 ********************************
 
