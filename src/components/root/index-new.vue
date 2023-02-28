@@ -3,7 +3,7 @@
     <!-- 左侧表格 -->
     <sync-scroll-container
       vertical
-      style="height: 100%; display: inline-block"
+      style="width: auto; height: 100%; display: inline-block"
       hide-scroll
       disable-horizontal
       :group="id"
@@ -52,6 +52,7 @@
             background: linear-gradient(0.25turn, blue, yellow, red);
             position: sticky;
             top: 0;
+            white-space: nowrap;
           "
         >
           <div
