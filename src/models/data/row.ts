@@ -5,7 +5,7 @@
  * @Author: JeremyJone
  * @Date: 2021-09-09 15:50:52
  * @LastEditors: JeremyJone
- * @LastEditTime: 2022-04-21 11:12:22
+ * @LastEditTime: 2024-07-04 09:34:14
  * @Description: 一条数据类
  */
 
@@ -160,7 +160,7 @@ export class Row {
     const el = options.endLabel || Variables.key.end;
 
     Object.assign(this.options, { sl, el });
-    this.__isExpand = this.options.isExpand || true;
+    this.__isExpand = this.options.isExpand ?? true;
 
     // const that = this;
     // this.__data = new Proxy(data, {
