@@ -160,7 +160,7 @@ export class Row {
     const el = options.endLabel || Variables.key.end;
 
     Object.assign(this.options, { sl, el });
-    this.__isExpand = this.options.isExpand || true;
+    this.__isExpand = data?.isExpand ?? options.isExpand ?? true;
 
     // const that = this;
     // this.__data = new Proxy(data, {
