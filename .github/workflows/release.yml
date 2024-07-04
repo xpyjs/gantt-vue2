@@ -1,0 +1,55 @@
+name: 发布
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Get branch from tag
+        id: get_branch
+        run: |
+          tag_name=${GITHUB_REF#refs/tags/}
+          branch_name=$(git branch -r --contains tags/$tag_name | grep -oE 'origin/[^ ]+' | sed 's|origin/||' | head -n 1)
+          echo "Branch name: $branch_name"
+          echo ::set-output name=BRANCH::$branch_name
+
+      - name: Checkout branch
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ steps.get_branch.outputs.BRANCH }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Authenticate to npm
+        run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Build
+        run: yarn build
+
+      - name: Publish
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+
+
+
+
